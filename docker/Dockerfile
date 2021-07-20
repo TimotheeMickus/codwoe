@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     software-properties-common && \
     rm -rf /var/lib/apt/lists/*
-RUN add-apt-repository ppa:deadsnakes/ppa 
+RUN add-apt-repository ppa:deadsnakes/ppa
 
 # set up python
 RUN apt-get update && apt-get install -y \
@@ -28,10 +28,10 @@ RUN curl https://bootstrap.pypa.io/get-pip.py | python3.8
 
 # Without this Python thinks we're ASCII and unicode chars fail
 ENV LANG C.UTF-8
-    
+
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
-  
+
 # install libraries
 RUN pip3 install -U --no-cache-dir \
 	absl-py==0.12.0 \
@@ -83,5 +83,8 @@ RUN pip3 install -U --no-cache-dir \
 	urllib3==1.26.4 \
 	Werkzeug==2.0.1
 
+# the next line will patch moverscore so that it runs on cpu, rather than on your cuda:0 device.
+# comment this line if you have access to a GPU
 RUN find . -type f -name moverscore_v2.py -exec sed -i 's/cuda:0/cpu/g' {} \;
+
 RUN python3 -c "import nltk; nltk.download('punkt')"
