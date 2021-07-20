@@ -1,0 +1,2 @@
+command: python3 $program/codwoe_entrypoint.py score $input/res/ --reference_files_dir $input/ref/ --output_file $output
+description: run scoring program on any data

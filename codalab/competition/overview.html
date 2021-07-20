@@ -1,0 +1,113 @@
+<h3>
+	CODWOE: COmparing Dictionaries and WOrd Embeddings
+</h3>
+<p>
+	The CODWOE shared task invites you to compare two types of semantic
+	descriptions: dictionary glosses and word embedding representations. Are these
+	two types of representation equivalent? Can we generate one from the other? To
+	study this question, we propose two subtracks: a <b>definition modeling</b>
+	track (Noraset et al., 2017), where participants have to generate glosses from
+	vectors, and a <b>reverse dictionary</b> track (Hill et al., 2016), where
+	participants have to generate vectors from glosses.
+</p>
+<p>
+	These two tracks display a number of interesting characteristics. Definition
+	modeling is a vector-to-sequence task, the reverse dictionary task is a
+	sequence-to-vector task&mdash;and you know that kind of thing gets NLP people
+	swearing out loud. These tasks are also useful for explainable AI, since they
+	involve converting human-readable data into machine-readable data and back.
+</p>
+
+<h3>
+	What we are fishing for with this shared task
+</h3>
+<p>
+	Rather than focusing strictly on getting the highest scores on a benchmark, we
+	encourage participants to approach this shared task as a collaborative
+	research question: how should we compare two vastly different types of
+	semantic representations such as dictionaries and word embeddings? What
+	caveats are there? In fact, we already have a few questions we look forward to
+	study at the end of this shared task:
+</p>
+<ul>
+	<li>
+		<b>Do all architectures yield comparable results?</b> Transformers, for
+		instance, are generally hard to tune, require large amounts of data to train
+		and have no default way of being primed with a vector: how will they fare on
+		our two tracks?
+	</li>
+	<li>
+		<b>What are the effects of combining different inputs?</b> Do multilingual
+		models fare better than monolingual models? Does handling both tracks with
+		the same model help or hinder results?
+	</li>
+	<li>
+		<b>Do contextual embeddings help to define polysemous words?</b> Most
+		approaches that use contextual embeddings in downstream applications rely on
+		fine-tuning. Will contextual embeddings used as features also prove helpful?
+	</li>
+</ul>
+<p>
+	These are but a few questions that we are interested in&mdash;do come up with
+	your own to test during this shared task! To encourage participants to adopt
+	this mindset, here are a few key elements of this shared task:
+</p>
+<ul>
+	<li>
+		data from <b>5 languages</b> (EN, ES, FR, IT, RU) and from <b>multiple
+		embedding architectures</b>, both static and contextual, all trained on
+		comparable corpora
+	</li>
+	<li>
+		a <b>richly annotated trial dataset</b>, which will be useful for the manual
+		evaluation of your systems
+	</li>
+	<li>
+		usage of external resources is <b>not allowed</b>, to ensure that all
+		submissions are comparable
+	</li>
+	<li>
+		a strong <b>focus on manual analyses</b> of a submitted model’s behavior
+		during the reviewing process
+	</li>
+</ul>
+<p>
+	As is usual for SemEval tasks, we will release all data at the end of the
+	shared task. Depending on participants’ consent, we also plan to collect the
+	productions of all models and reuse them in a future evaluation campaign.
+</p>
+
+<h3>
+	Shared task timeline (this too shall bass)
+</h3>
+<p>
+	Here are the key dates participants should keep in mind:
+	<ul>
+		<li>
+			September 3, 2021: Training data & development data
+		</li>
+		<li>
+			December 3, 2021: Test data ready
+		</li>
+		<li>
+			January 10, 2022: Evaluation start
+		</li>
+		<li>
+			January 31, 2022: Evaluation end
+		</li>
+		<li>
+			February 23, 2022: Paper submission due
+		</li>
+		<li>
+			March 31, 2022: Notification to authors
+		</li>
+	</ul>
+	Camera-ready due date and SemEval 2022 workshops will be announced at a later
+	date.
+</p>
+
+<h3>
+	You have an issue? You need kelp? Get in touch!
+</h3>
+You can reach us organizers at XXX. There’s also a google group for all
+prospective participants: check it out at YYY.
