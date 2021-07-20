@@ -30,6 +30,10 @@ sequence-to-vector task—and you know that kind of thing gets NLP people sweari
 out loud. These tasks are also useful for explainable AI, since they involve
 converting human-readable data into machine-readable data and back.
 
+To get involved: check out the [codalab competition](http://example.org/). There
+is also a participants' [google group](http://example.org/). You can reach out
+to us organizer through [this mailing list](http://example.org/).
+
 # Using this repository
 To install the exact environment used for our scripts, use the dockerfile. You
 can also pull this docker image frome dockerhub:
