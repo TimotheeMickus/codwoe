@@ -1,5 +1,5 @@
 competition/scoring_program.zip: scoring_program/*
-	cd scoring_program && zip ../competition/scoring_program.zip * && cd ..
+	cd scoring_program && zip ./scoring_program.zip * && cd .. && mv scoring_program/scoring_program.zip ./competition/
 
 competition/dev_data.zip: dev_data/*
 	cd dev_data && zip ../competition/dev_data.zip * && cd ..
