@@ -17,6 +17,44 @@
 	swearing out loud. These tasks are also useful for explainable AI, since they
 	involve converting human-readable data into machine-readable data and back.
 </p>
+<p>
+	Dictionaries contain definitions, such as
+	<a href="https://www.merriam-webster.com/dictionary/cod">Merriam
+	Webster's</a>:
+<p>
+<blockquote cite="https://www.merriam-webster.com/dictionary/cod">
+	<b>cod:</b> <em>any of various bottom-dwelling fishes (family Gadidae, the cod
+	family) that usually occur in cold marine waters and often have barbels and
+	three dorsal fins</em>
+</blockquote>
+<p>
+	The task of definition modeling consists in using the vector representation of
+	<tt>co&#8407;d</tt> to produce the associated gloss, "<em>any of various
+	bottom-dwelling fishes (family Gadidae, the cod family) that usually occur in
+	cold marine waters and often have barbels and three dorsal fins</em>". The
+	reverse dictionary task is the mathematical inverse: reconstruct an	embedding
+	<tt>co&#8407;d</tt> from the corresponding gloss.
+</p>
+<p>
+	These two tracks display a number of interesting characteristics. These tasks
+	are obviously <b>useful for explainable AI</b>, since they involve converting
+	human-readable data into machine-readable data and back. They also have a
+	<b>theoretical significance</b>: both glosses and word embeddings are also
+	representations of meaning, and therefore involve the conversion of distinct
+	non-formal semantic representations. From a practical point of view, the
+	ability to infer word-embeddings from dictionary resources, or dictionaries
+	from large unannotated corpora, would prove <b>a boon for many under-resourced
+	languages</b>.
+</p>
+<h3>
+	Dive right in and get started!
+</h3>
+<p>
+	The data can be retrieved from here: XXX.	To help participants get started, we
+	provide a basic architecture for both tracks, a submission format checker, and
+	the scoring script. All of this is available in our public
+	<a href="https://git.atilf.fr/tmickus/codwoe">git repository</a>.
+</p>
 
 <h3>
 	What we are fishing for with this shared task
@@ -81,16 +119,14 @@
 	Shared task timeline (this too shall bass)
 </h3>
 <p>
-	Here are the key dates participants should keep in mind:
+	Here are the key dates participants should keep in mind. All are assumed to be
+	anywhere on Earth.
 	<ul>
 		<li>
-			September 3, 2021: Training data & development data
+			September 3, 2021: Training data & development data made available
 		</li>
 		<li>
-			December 3, 2021: Test data ready
-		</li>
-		<li>
-			January 10, 2022: Evaluation start
+			January 10, 2022: Evaluation data made available & evaluation start
 		</li>
 		<li>
 			January 31, 2022: Evaluation end
