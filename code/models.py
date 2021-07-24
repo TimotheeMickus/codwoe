@@ -29,7 +29,7 @@ class PositionalEncoding(nn.Module):
 class DefmodModel(nn.Module):
     """A transformer architecture for Definition Modeling."""
     def __init__(self, vocab, d_model=256, n_head=4, n_layers=6, dropout=0.1,
-    maxlen=64):
+    maxlen=128):
         super(DefmodModel, self).__init__()
         self.d_model = d_model
         self.padding_idx = vocab[data.PAD]

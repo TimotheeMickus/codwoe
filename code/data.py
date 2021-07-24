@@ -17,13 +17,13 @@ SUPPORTED_ARCHS = ("sgns", "char")
 # A dataset is a container object for the actual data
 class JSONDataset(Dataset):
     """Reads a CODWOE JSON dataset"""
-    def __init__(self, file, vocab=None, freeze_vocab=False):
+    def __init__(self, file, vocab=None, freeze_vocab=False, maxlen=128):
         if vocab is None:
             self.vocab = defaultdict(count().__next__)
         else:
             self.vocab = defaultdict(count(len(vocab)).__next__)
             self.vocab.update(vocab)
-        *_, unk = self.vocab[PAD], self.vocab[EOS], self.vocab[BOS], self.vocab[UNK]
+        pad, eos, bos, unk = self.vocab[PAD], self.vocab[EOS], self.vocab[BOS], self.vocab[UNK]
         if freeze_vocab:
             self.vocab = dict(vocab)
         with open(file, "r") as istr:
@@ -32,10 +32,12 @@ class JSONDataset(Dataset):
         for json_dict in self.items:
             # in definition modeling test datasets, gloss targets are absent
             if "gloss" in  json_dict:
-                json_dict["gloss_tensor"] = torch.tensor([
+                json_dict["gloss_tensor"] = torch.tensor([bos] + [
                     self.vocab[word] if not freeze_vocab else self.vocab.get(word, unk)
                     for word in json_dict["gloss"].split()
-                ])
+                ] + [eos])
+                if maxlen:
+                    json_dict["gloss_tensor"] = json_dict["gloss_tensor"][:maxlen]
             # in reverse dictionary test datasets, vector targets are absent
             for arch in SUPPORTED_ARCHS:
                 if arch in json_dict:
