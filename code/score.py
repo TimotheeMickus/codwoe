@@ -1,7 +1,12 @@
 import argparse
 import collections
+import itertools
 import json
+import os
 import pathlib
+
+os.environ['MOVERSCORE_MODEL'] = "distilbert-base-multilingual-cased"
+import moverscore_v2 as mv_sc
 
 from nltk.translate.bleu_score import sentence_bleu as bleu
 from nltk import word_tokenize as tokenize
@@ -17,6 +22,37 @@ def get_parser(parser=argparse.ArgumentParser(description="score a submission"))
     parser.add_argument("--reference_files_dir", type=pathlib.Path, help="directory containing all reference files", default=pathlib.Path("data"))
     parser.add_argument("--output_file", type=pathlib.Path, help="default path to print output", default=pathlib.Path("scores.txt"))
     return parser
+
+
+def mover_sentence_score(hypothesis, references, trace=0):
+    """From the MoverScore github"""
+    idf_dict_hyp = collections.defaultdict(lambda: 1.)
+    idf_dict_ref = collections.defaultdict(lambda: 1.)
+    hypothesis = [hypothesis] * len(references)
+    sentence_score = 0
+    scores = mv_sc.word_mover_score(references, hypothesis, idf_dict_ref, idf_dict_hyp, stop_words=[], n_gram=1, remove_subwords=False)
+    sentence_score = np.mean(scores)
+    if trace > 0:
+        print(hypothesis, references, sentence_score)
+    return sentence_score
+
+
+def mover_corpus_score(sys_stream, ref_streams, trace=0):
+    """From the MoverScore github"""
+    if isinstance(sys_stream, str):
+        sys_stream = [sys_stream]
+    if isinstance(ref_streams, str):
+        ref_streams = [[ref_streams]]
+    fhs = [sys_stream] + ref_streams
+    corpus_score = 0
+    for lines in itertools.zip_longest(*fhs):
+        if None in lines:
+            raise EOFError("Source and reference streams have different lengths!")
+        hypo, *refs = lines
+        corpus_score += mover_sentence_score(hypo, refs, trace=0)
+    corpus_score /= len(sys_stream)
+    return corpus_score
+
 
 def eval_defmod(args, summary):
     # 1. read contents
@@ -45,15 +81,11 @@ def eval_defmod(args, summary):
             bleu([sub["gloss"]], g)
             for g in reference_lemma_groups[(sub["word"], sub["pos"])]
         )
-    lemma_bleu_average = utils.average(s["lemma-BLEU"] for s in submission)
-    sense_bleu_average = utils.average(s["sense-BLEU"] for s in submission)
+    lemma_bleu_average = sum(s["lemma-BLEU"] for s in submission) / len(submission)
+    sense_bleu_average = sum(s["sense-BLEU"] for s in submission) / len(submission)
     ## compute MoverScore
-    moverscore_average = utils.mover_corpus_score(all_preds, [all_tgts])
-    # 3. display results
-    # utils.display(f"Submission {args.submission_file}, " + \
-    #     f"MoverScore={moverscore_average} "+ \
-    #     f"Lemma BLEU={lemma_bleu_average} "+ \
-    #     f"Sense BLEU={sense_bleu_average}.")
+    moverscore_average = mover_corpus_score(all_preds, [all_tgts])
+    # 3. write results
     with open(args.output_file, "w") as ostr:
         print(f"MoverScore_{summary.lang}:{moverscore_average}", file=ostr)
         print(f"BLEU_lemma_{summary.lang}:{lemma_bleu_average}", file=ostr)

@@ -19,7 +19,7 @@ def get_parser(parser=argparse.ArgumentParser(description="Run a reverse diction
     parser.add_argument("--dev-file", type=pathlib.Path, help="path to the dev file")
     parser.add_argument("--test-file", type=pathlib.Path, help="path to the test file")
     parser.add_argument("--device", type=torch.device, default=torch.device("cpu"), help="path to the train file")
-    parser.add_argument("--target-arch", type=str, default="w2v", help="embedding architecture to use as target")
+    parser.add_argument("--target-arch", type=str, default="sgns", choices=("sgns", "char", "electra"), help="embedding architecture to use as target")
     parser.add_argument("--summary-logdir", type=pathlib.Path, default=pathlib.Path("logs") / f"revdict-baseline", help="write logs for future analysis")
     parser.add_argument("--save-dir", type=pathlib.Path, default=pathlib.Path("models") / f"revdict-baseline", help="where to save model & vocab")
     parser.add_argument("--pred-file", type=pathlib.Path, default=pathlib.Path("revdict-baseline-preds.json"), help="where to save predictions")
@@ -30,51 +30,58 @@ def train(args):
     assert args.train_file is not None, "Missing dataset for training"
     # 1. get data, vocabulary, summary writer
     utils.display("Preloading training data")
-    train_dataset, vocab = utils.read_dataset(args.train_file, device=args.device)
+    ## make datasets
+    train_dataset = data.JSONDataset(args.train_file)
     if args.dev_file:
-        dev_dataset, _ = utils.read_dataset(args.dev_file, vocab=vocab, device=args.device)
-    # save vocab for future work
-    args.save_dir.mkdir(parents=True, exist_ok=True)
-    with open(args.save_dir / "vocab.json", "w") as ostr:
-        json.dump(vocab, ostr)
+        dev_dataset = data.JSONDataset(args.dev_file, vocab=train_dataset.vocab)
+    ## assert they correspond to the task
+    assert train_dataset.has_gloss, "Training dataset contains no gloss."
+    if args.target_arch == "electra":
+        assert train_dataset.has_electra, \
+            "Training datatset contains no vector."
+    else:
+        assert train_dataset.has_vecs, "Training datatset contains no vector."
+    if args.dev_file:
+        assert dev_dataset.has_gloss, "Development dataset contains no gloss."
+        if args.target_arch == "electra":
+            assert dev_dataset.has_electra, \
+                "Development dataset contains no vector."
+        else:
+            assert dev_dataset.has_vecs, \
+                "Development dataset contains no vector."
+    ## make dataloader
+    train_dataloader = data.get_dataloader(train_dataset)
+    dev_dataloader = data.get_dataloader(dev_dataset, shuffle=False)
+    ## make summary writer
     summary_writer = SummaryWriter(args.summary_logdir)
     train_step = itertools.count() # to keep track of the training steps for logging
 
     # 2. construct model
     ## Hyperparams
-    D_MODEL, N_HEAD, N_LAYERS, DROPOUT = 256, 4, 6, 0.1
-    ## declare model
-    encoder_layer = nn.TransformerEncoderLayer(d_model=D_MODEL, nhead=N_HEAD, dropout=DROPOUT, dim_feedforward=D_MODEL*2)
-    transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=N_LAYERS)
-    model = nn.Sequential(
-        nn.Embedding(len(vocab), D_MODEL, padding_idx=vocab[utils.PAD_token]),
-        utils.PositionalEncoding(D_MODEL, dropout=DROPOUT),
-        transformer_encoder,
-        utils.SumLayer(dim=0)
-    ).to(args.device)
-    ## initialize weights
-    for name, param in model.named_parameters():
-        if param.dim() > 1:
-            nn.init.xavier_uniform_(param)
-        elif 'bias' in name:
-            nn.init.zeros_(param)
-        else: # gain parameters of the layer norm
-            nn.init.ones_(param)
+    model = models.RevdictModel(dev_dataset.vocab).to(args.device)
     model.train()
 
     # 3. declare optimizer & criterion
     ## Hyperparams
     EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 10, 1.e-4, .9, .999, 1.e-5
-    optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE, betas=(BETA1, BETA2), weight_decay=WEIGHT_DECAY)
+    optimizer = optim.Adam(
+        model.parameters(),
+        lr=LEARNING_RATE,
+        betas=(BETA1, BETA2),
+        weight_decay=WEIGHT_DECAY
+    )
     criterion = nn.MSELoss()
+
+    vec_tensor_key = f"{args.target_arch}_tensor"
 
     # 4. train model
     for epoch in tqdm.trange(EPOCHS, desc="Epoch"):
         ## train loop
-        for example in tqdm.tqdm(train_dataset, desc="Train", leave=False):
+        pbar = tqdm.tqdm(desc="Train", total=len(train_dataset), leave=False)
+        for batch in train_dataloader:
             optimizer.zero_grad()
-            src = example["tensors"]["gloss"].unsqueeze(1)
-            tgt = example["tensors"][args.target_arch].unsqueeze(0)
+            src = batch["gloss_tensor"].to(args.device)
+            tgt = batch[vec_tensor_key].to(args.device)
             pred = model(src)
             loss = criterion(pred, tgt)
             loss.backward()
@@ -86,9 +93,10 @@ def train(args):
             model.eval()
             with torch.no_grad():
                 sum_dev_loss = 0.0
-                for example in tqdm.tqdm(dev_dataset, desc="Eval.", leave=False):
-                    src = example["tensors"]["gloss"].unsqueeze(1)
-                    tgt = example["tensors"][args.target_arch].unsqueeze(0)
+                pbar = tqdm.tqdm(desc="Train", total=len(train_dataset), leave=False)
+                for batch in dev_dataloader:
+                    src = batch["gloss_tensors"].to(args.device)
+                    tgt = batch[vec_tensor_key].unsqueeze(0)
                     pred = model(src)
                     sum_dev_loss += criterion(pred, tgt).item()
                 # keep track of the average loss on dev set for this epoch
@@ -96,25 +104,34 @@ def train(args):
             model.train()
 
     # 5. save result
-    torch.save(model, args.save_dir / "model.pt")
+    model.save(args.save_dir / "model.pt")
+    train_dataset.save(args.save_dir / "train_dataset.pt")
+    dev_dataset.save(args.save_dir / "dev_dataset.pt")
+
 
 def pred(args):
     assert args.test_file is not None, "Missing dataset for test"
     # 1. retrieve vocab, dataset, model
-    with open(args.save_dir / "vocab.json", "r") as istr:
-        vocab = json.load(istr)
-    test_dataset, _ = utils.read_dataset(args.test_file, vocab=vocab, device=args.device)
-    model = torch.load(args.save_dir / "model.pt")
+    model = models.DefmodModel.load(args.save_dir / "model.pt")
+    train_vocab = data.JSONDataset.load(args.save_dir / "train_data.pt").vocab
+    test_dataset = data.JSONDataset(args.test_file, vocab=vocab)
+    test_dataloader = data.get_dataloader(test_dataset, shuffle=False)
     model.eval()
+    vec_tensor_key = f"{args.target_arch}_tensor"
+    assert test_dataset.has_gloss, "File is not usable for the task"
     # 2. make predictions
+    predictions = []
     with torch.no_grad():
-        for example in tqdm.tqdm(test_dataset, desc="Pred."):
-            src = example["tensors"]["gloss"].unsqueeze(1)
-            pred = model(src)
-            example[args.target_arch] = pred.view(-1).tolist()
-            del example["tensors"]
+        pbar = tqdm.tqdm(desc="Pred.", total=len(test_dataset))
+        for batch in test_dataloader:
+            vecs = model(batch["gloss_tensor"].to(args.device))
+            for id, vec in zip(batch["id"], vecs):
+                predictions.append({
+                    "id": id,
+                    args.target_arch: pred.view(-1).cpu().tolist()
+                })
     with open(args.pred_file, "w") as ostr:
-        json.dump(test_dataset, ostr, indent=2)
+        json.dump(test_dataset, ostr)
 
 
 def main(args):

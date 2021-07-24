@@ -60,4 +60,9 @@ To score a submission, use
 ```sh
 $ python3 code/codwoe_entrypoint.py score $PATH_TO_SUBMISSION_FILE --reference_files_dir $PATH_TO_DATA_DIR
 ```
-Note that this requires the gold files, not available at the start of the competition
+Note that this requires the gold files, not available at the start of the
+competition.
+
+Other useful files to look at include `code/models.py`, where our baseline 
+architectures are defined, and `code/data.py`, which shows how to use the JSON
+datasets with the PyTorch dataset API.
