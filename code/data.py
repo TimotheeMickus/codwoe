@@ -84,7 +84,7 @@ class JSONDataset(Dataset):
 # A sampler allows you to define how to select items from your Dataset. Torch
 # provides a number of default Sampler classes
 class TokenSampler(Sampler):
-    """Produce batches with constant number of tokens in batched tensors"""
+    """Produce batches with up to `batch_size` tokens in each batch"""
     def __init__(self, dataset, batch_size=32, size_fn=len, drop_last=False,
     shuffle=True):
         self.dataset = dataset
@@ -151,9 +151,8 @@ def get_dataloader(dataset, batch_size=128, shuffle=True):
             batch["electra_tensor"] = torch.stack(batch["electra_tensor"])
         return dict(batch)
     if dataset.has_gloss:
-        # we use this function in our sampler, tod etermine how many tokens will be
-        # fed into to the transformer and keep that amount roughly constant across
-        # all batches.
+        # we try to keep the amount of gloss tokens roughly constant across all
+        # batches.
         def do_size_item(item):
             """retrieve tensor size, so as to batch items per elements"""
             return item["gloss_tensor"].numel()
@@ -163,12 +162,14 @@ def get_dataloader(dataset, batch_size=128, shuffle=True):
             collate_fn=do_collate,
             batch_sampler=TokenSampler(
                 dataset,
-                batch_size=int(batch_size),
+                batch_size=batch_size,
                 size_fn=do_size_item,
                 shuffle=shuffle
             ),
         )
     else:
+        # there's no gloss, hence no gloss tokens, so we use a default batching
+        # strategy.
         return DataLoader(
             dataset,
             collate_fn=do_collate,

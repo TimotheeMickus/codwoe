@@ -15,6 +15,7 @@ import data
 import models
 import utils
 
+
 def get_parser(parser=argparse.ArgumentParser(description="run a definition modeling baseline")):
     parser.add_argument("--do_train", action="store_true", help="whether to train a model from scratch")
     parser.add_argument("--do_pred", action="store_true", help="whether to produce predictions")
@@ -136,7 +137,7 @@ def pred(args):
     # 1. retrieve vocab, dataset, model
     model = models.DefmodModel.load(args.save_dir / "model.pt")
     train_vocab = data.JSONDataset.load(args.save_dir / "train_dataset.pt").vocab
-    test_dataset = data.JSONDataset(args.test_file, vocab=train_vocab)
+    test_dataset = data.JSONDataset(args.test_file, vocab=train_vocab, freeze_vocab=True, maxlen=model.maxlen)
     test_dataloader = data.get_dataloader(test_dataset, shuffle=False)
     model.eval()
     vec_tensor_key = f"{args.source_arch}_tensor"

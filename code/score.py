@@ -14,7 +14,7 @@ from nltk import word_tokenize as tokenize
 import torch
 import torch.nn.functional as F
 
-import utils, check_output
+import check_output
 
 
 def get_parser(parser=argparse.ArgumentParser(description="score a submission")):
@@ -142,7 +142,7 @@ def eval_revdict(args, summary):
         for arch in vec_archs
     }
     # 3. display results
-    # utils.display(f"Submission {args.submission_file}, \n\tMSE: " + \
+    # print(f"Submission {args.submission_file}, \n\tMSE: " + \
     #     ", ".join(f"{a}={MSE_scores[a]}" for a in vec_archs) + \
     #     ", \n\tcosine: " + \
     #     ", ".join(f"{a}={cos_scores[a]}" for a in vec_archs) + \
