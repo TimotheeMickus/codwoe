@@ -65,14 +65,14 @@ class JSONDataset(Dataset):
                 # we have batched tensors of shape [Seq x Batch]
                 decoded = []
                 for tensor_ in tensor.t():
-                    decoded.append(self.decode(tensor))
+                    decoded.append(self.decode(tensor_))
                 return decoded
             else:
-                return [
+                return " ".join([
                     self.itos[i.item()]
                     for i in tensor
                     if i != self.vocab[PAD]
-                ]
+                ])
 
     def save(self, file):
         torch.save(self, file)

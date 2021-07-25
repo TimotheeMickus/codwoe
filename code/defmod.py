@@ -67,7 +67,7 @@ def train(args):
 
     # 3. declare optimizer & criterion
     ## Hyperparams
-    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 10, 1.e-4, .9, .999, 1.e-5
+    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 20, 1.e-4, .9, .999, 1.e-5
     optimizer = optim.AdamW(
         model.parameters(),
         lr=LEARNING_RATE,
@@ -112,7 +112,8 @@ def train(args):
                     sum_dev_loss += F.cross_entropy(
                         pred.view(-1, pred.size(-1)),
                         gls.view(-1),
-                        reduction="sum"
+                        reduction="sum",
+                        ignore_index=model.padding_idx
                     ).item()
                     tokens = (gls != model.padding_idx)
                     ntoks += tokens.sum().item()
@@ -148,7 +149,7 @@ def pred(args):
     with torch.no_grad():
         pbar = tqdm.tqdm(desc="Pred.", total=len(test_dataset))
         for batch in test_dataloader:
-            sequence = model(batch[vec_tensor_key].to(args.device))
+            sequence = model.pred(batch[vec_tensor_key].to(args.device))
             for id, gloss in zip(batch["id"], test_dataset.decode(sequence)):
                 predictions.append({"id": id, "gloss": gloss})
             pbar.update(batch[vec_tensor_key].size(0))

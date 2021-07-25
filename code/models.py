@@ -28,7 +28,7 @@ class PositionalEncoding(nn.Module):
 
 class DefmodModel(nn.Module):
     """A transformer architecture for Definition Modeling."""
-    def __init__(self, vocab, d_model=256, n_head=4, n_layers=6, dropout=0.1,
+    def __init__(self, vocab, d_model=256, n_head=4, n_layers=6, dropout=0.25,
     maxlen=128):
         super(DefmodModel, self).__init__()
         self.d_model = d_model
@@ -75,8 +75,6 @@ class DefmodModel(nn.Module):
         return mask
 
     def forward(self, vector, input_sequence=None):
-        if input_sequence is None:
-            return self.pred(vector)
         device = next(self.parameters()).device
         embs = self.embedding(input_sequence)
         seq = torch.cat([vector.unsqueeze(0), embs], dim=0)
@@ -118,7 +116,7 @@ class DefmodModel(nn.Module):
             )[-1]
             v_dist = self.v_proj(transformer_output)
             new_symbol = v_dist.argmax(-1)
-            new_symbol.masked_fill(has_stopped, self.padding_idx)
+            new_symbol = new_symbol.masked_fill(has_stopped, self.padding_idx)
             generated_symbols.append(new_symbol)
             src_key_padding_mask = torch.cat([
                 src_key_padding_mask,
