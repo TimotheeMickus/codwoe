@@ -1,7 +1,15 @@
 import argparse
 import itertools
 import json
+import logging
 import pathlib
+import sys
+
+logger = logging.getLogger(pathlib.Path(__file__).name)
+logger.setLevel(logging.DEBUG)
+handler = logging.StreamHandler(sys.stdout)
+handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(name)s: %(message)s'))
+logger.addHandler(handler)
 
 import torch
 import torch.nn as nn
@@ -13,7 +21,6 @@ import tqdm
 
 import data
 import models
-import utils
 
 
 def get_parser(parser=argparse.ArgumentParser(description="run a definition modeling baseline")):
@@ -33,7 +40,7 @@ def get_parser(parser=argparse.ArgumentParser(description="run a definition mode
 def train(args):
     assert args.train_file is not None, "Missing dataset for training"
     # 1. get data, vocabulary, summary writer
-    utils.display("Preloading training data")
+    logger.debug("Preloading training data")
     ## make datasets
     train_dataset = data.JSONDataset(args.train_file)
     if args.dev_file:
@@ -61,14 +68,14 @@ def train(args):
     train_step = itertools.count() # to keep track of the training steps for logging
 
     # 2. construct model
-    utils.display("Building model")
+    logger.debug("Setting up training environment")
 
     model = models.DefmodModel(dev_dataset.vocab).to(args.device)
     model.train()
 
     # 3. declare optimizer & criterion
     ## Hyperparams
-    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 20, 1.e-4, .9, .999, 1.e-5
+    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 50, 1.e-4, .9, .999, 1.e-5
     optimizer = optim.AdamW(
         model.parameters(),
         lr=LEARNING_RATE,
@@ -80,9 +87,9 @@ def train(args):
     vec_tensor_key = f"{args.source_arch}_tensor"
 
     # 4. train model
-    for epoch in tqdm.trange(EPOCHS, desc="Epoch"):
+    for epoch in tqdm.trange(EPOCHS, desc="Epoch", disable=None):
         ## train loop
-        pbar = tqdm.tqdm(desc="Train", total=len(train_dataset), leave=False)
+        pbar = tqdm.tqdm(desc=f"Train {epoch}", total=len(train_dataset), disable=None)
         for batch in train_dataloader:
             optimizer.zero_grad()
             vec = batch[vec_tensor_key].to(args.device)
@@ -105,7 +112,7 @@ def train(args):
                 sum_dev_loss = 0.0
                 sum_acc = 0
                 ntoks = 0
-                pbar = tqdm.tqdm(desc="Eval", total=len(dev_dataset), leave=False)
+                pbar = tqdm.tqdm(desc=f"Eval {epoch}", total=len(dev_dataset), disable=None)
                 for batch in dev_dataloader:
                     vec = batch[vec_tensor_key].to(args.device)
                     gls = batch["gloss_tensor"].to(args.device)
@@ -148,7 +155,7 @@ def pred(args):
     # 2. make predictions
     predictions = []
     with torch.no_grad():
-        pbar = tqdm.tqdm(desc="Pred.", total=len(test_dataset))
+        pbar = tqdm.tqdm(desc="Pred.", total=len(test_dataset), disable=None)
         for batch in test_dataloader:
             sequence = model.pred(batch[vec_tensor_key].to(args.device))
             for id, gloss in zip(batch["id"], test_dataset.decode(sequence)):
@@ -161,8 +168,10 @@ def pred(args):
 
 def main(args):
     if args.do_train:
+        logger.debug("Performing defmod training")
         train(args)
     if args.do_pred:
+        logger.debug("Performing defmod prediction")
         pred(args)
 
 

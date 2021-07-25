@@ -1,7 +1,15 @@
 import argparse
 import itertools
 import json
+import logging
 import pathlib
+import sys
+
+logger = logging.getLogger(pathlib.Path(__file__).name)
+logger.setLevel(logging.DEBUG)
+handler = logging.StreamHandler(sys.stdout)
+handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(name)s: %(message)s'))
+logger.addHandler(handler)
 
 import torch
 import torch.nn as nn
@@ -13,7 +21,6 @@ import tqdm
 
 import data
 import models
-import utils
 
 def get_parser(parser=argparse.ArgumentParser(description="Run a reverse dictionary baseline.\nThe task consists in reconstructing an embedding from the glosses listed in the datasets")):
     parser.add_argument("--do_train", action="store_true", help="whether to train a model from scratch")
@@ -32,7 +39,7 @@ def get_parser(parser=argparse.ArgumentParser(description="Run a reverse diction
 def train(args):
     assert args.train_file is not None, "Missing dataset for training"
     # 1. get data, vocabulary, summary writer
-    utils.display("Preloading training data")
+    logger.debug("Preloading data")
     ## make datasets
     train_dataset = data.JSONDataset(args.train_file)
     if args.dev_file:
@@ -61,12 +68,13 @@ def train(args):
 
     # 2. construct model
     ## Hyperparams
+    logger.debug("Setting up training environment")
     model = models.RevdictModel(dev_dataset.vocab).to(args.device)
     model.train()
 
     # 3. declare optimizer & criterion
     ## Hyperparams
-    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 20, 1.e-4, .9, .999, 1.e-5
+    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 50, 1.e-4, .9, .999, 1.e-5
     optimizer = optim.Adam(
         model.parameters(),
         lr=LEARNING_RATE,
@@ -78,9 +86,9 @@ def train(args):
     vec_tensor_key = f"{args.target_arch}_tensor"
 
     # 4. train model
-    for epoch in tqdm.trange(EPOCHS, desc="Epoch"):
+    for epoch in tqdm.trange(EPOCHS, desc="Epoch", disable=None):
         ## train loop
-        pbar = tqdm.tqdm(desc="Train", total=len(train_dataset), leave=False)
+        pbar = tqdm.tqdm(desc=f"Train {epoch}", total=len(train_dataset), disable=None)
         for batch in train_dataloader:
             optimizer.zero_grad()
             gls = batch["gloss_tensor"].to(args.device)
@@ -99,7 +107,7 @@ def train(args):
             model.eval()
             with torch.no_grad():
                 sum_dev_loss, sum_cosine = 0.0, 0.0
-                pbar = tqdm.tqdm(desc="Eval", total=len(dev_dataset), leave=False)
+                pbar = tqdm.tqdm(desc=f"Eval {epoch}", total=len(dev_dataset), disable=None)
                 for batch in dev_dataloader:
                     gls = batch["gloss_tensor"].to(args.device)
                     vec = batch[vec_tensor_key].to(args.device)
@@ -146,10 +154,10 @@ def pred(args):
 
 def main(args):
     if args.do_train:
-        utils.display("Performing training")
+        logger.debug("Performing revdict training")
         train(args)
     if args.do_pred:
-        utils.display("Performing prediction")
+        logging.ino("Performing revdict prediction")
         pred(args)
 
 if __name__ == "__main__":

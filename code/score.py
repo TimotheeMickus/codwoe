@@ -2,8 +2,16 @@ import argparse
 import collections
 import itertools
 import json
+import logging
 import os
 import pathlib
+import sys
+
+logger = logging.getLogger(pathlib.Path(__file__).name)
+logger.setLevel(logging.DEBUG)
+handler = logging.StreamHandler(sys.stdout)
+handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(name)s: %(message)s'))
+logger.addHandler(handler)
 
 os.environ['MOVERSCORE_MODEL'] = "distilbert-base-multilingual-cased"
 import moverscore_v2 as mv_sc
@@ -86,6 +94,10 @@ def eval_defmod(args, summary):
     ## compute MoverScore
     moverscore_average = mover_corpus_score(all_preds, [all_tgts])
     # 3. write results
+    logger.debug(f"Submission {args.submission_file}, \n\tMvSc.: " + \
+        f"{moverscore_average}\n\tL-BLEU: {lemma_bleu_average}\n\tS-BLEU: " + \
+        f"{sense_bleu_average}"
+    )
     with open(args.output_file, "w") as ostr:
         print(f"MoverScore_{summary.lang}:{moverscore_average}", file=ostr)
         print(f"BLEU_lemma_{summary.lang}:{lemma_bleu_average}", file=ostr)
@@ -142,14 +154,14 @@ def eval_revdict(args, summary):
         for arch in vec_archs
     }
     # 3. display results
-    # print(f"Submission {args.submission_file}, \n\tMSE: " + \
-    #     ", ".join(f"{a}={MSE_scores[a]}" for a in vec_archs) + \
-    #     ", \n\tcosine: " + \
-    #     ", ".join(f"{a}={cos_scores[a]}" for a in vec_archs) + \
-    #     ", \n\tcosine ranks: " + \
-    #     ", ".join(f"{a}={rnk_scores[a]}" for a in vec_archs) + \
-    #     "."
-    # )
+    logger.debug(f"Submission {args.submission_file}, \n\tMSE: " + \
+        ", ".join(f"{a}={MSE_scores[a]}" for a in vec_archs) + \
+        ", \n\tcosine: " + \
+        ", ".join(f"{a}={cos_scores[a]}" for a in vec_archs) + \
+        ", \n\tcosine ranks: " + \
+        ", ".join(f"{a}={rnk_scores[a]}" for a in vec_archs) + \
+        "."
+    )
     # all_archs = sorted(set(reference[0].keys()) - {"id", "gloss", "word", "pos"})
     with open(args.output_file, "w") as ostr:
         for arch in vec_archs:

@@ -1,10 +1,15 @@
 import argparse
 import collections
-import pathlib
 import json
+import logging
+import pathlib
+import sys
 
-import utils
-
+logger = logging.getLogger(pathlib.Path(__file__).name)
+logger.setLevel(logging.DEBUG)
+handler = logging.StreamHandler(sys.stdout)
+handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(name)s: %(message)s'))
+logger.addHandler(handler)
 
 def get_parser(parser=argparse.ArgumentParser(description="Verify the output format of a submission")):
     parser.add_argument("submission_file", type=pathlib.Path, help="file to check")
@@ -59,7 +64,7 @@ def main(filename):
             ok_message += f'\tSubmission predicts these embeddings: {", ".join(vec_archs)}.'
         else:
             vec_archs = None
-        utils.display(ok_message)
+        logger.debug(ok_message)
         CheckSummary = collections.namedtuple("CheckSummary", ["filename", "track", "lang", "vec_archs"])
         return CheckSummary(filename, track, lang, vec_archs)
 
