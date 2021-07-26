@@ -86,9 +86,9 @@ def train(args):
     vec_tensor_key = f"{args.target_arch}_tensor"
 
     # 4. train model
-    for epoch in tqdm.trange(EPOCHS, desc="Epoch", disable=None):
+    for epoch in tqdm.trange(EPOCHS, desc="Epochs"):
         ## train loop
-        pbar = tqdm.tqdm(desc=f"Train {epoch}", total=len(train_dataset), disable=None)
+        pbar = tqdm.tqdm(desc=f"Train {epoch}", total=len(train_dataset), disable=None, leave=False)
         for batch in train_dataloader:
             optimizer.zero_grad()
             gls = batch["gloss_tensor"].to(args.device)
@@ -98,16 +98,17 @@ def train(args):
             loss.backward()
             # keep track of the train loss for this step
             next_step = next(train_step)
-            summary_writer.add_scalar("train/cos", F.cosine_similarity(pred, vec).mean().item(), next_step)
-            summary_writer.add_scalar("train/loss", loss.item(), next_step)
+            summary_writer.add_scalar("revdict-train/cos", F.cosine_similarity(pred, vec).mean().item(), next_step)
+            summary_writer.add_scalar("revdict-train/mse", loss.item(), next_step)
             optimizer.step()
             pbar.update(vec.size(0))
+        pbar.close()
         ## eval loop
         if args.dev_file:
             model.eval()
             with torch.no_grad():
                 sum_dev_loss, sum_cosine = 0.0, 0.0
-                pbar = tqdm.tqdm(desc=f"Eval {epoch}", total=len(dev_dataset), disable=None)
+                pbar = tqdm.tqdm(desc=f"Eval {epoch}", total=len(dev_dataset), disable=None, leave=False)
                 for batch in dev_dataloader:
                     gls = batch["gloss_tensor"].to(args.device)
                     vec = batch[vec_tensor_key].to(args.device)
@@ -116,8 +117,9 @@ def train(args):
                     sum_cosine += F.cosine_similarity(pred, vec).sum().item()
                     pbar.update(vec.size(0))
                 # keep track of the average loss on dev set for this epoch
-                summary_writer.add_scalar("dev/cos", sum_cosine / len(dev_dataset), epoch)
-                summary_writer.add_scalar("dev/loss", sum_dev_loss / len(dev_dataset), epoch)
+                summary_writer.add_scalar("revdict-dev/cos", sum_cosine / len(dev_dataset), epoch)
+                summary_writer.add_scalar("revdict-dev/mse", sum_dev_loss / len(dev_dataset), epoch)
+                pbar.close()
             model.train()
 
     # 5. save result
@@ -148,6 +150,7 @@ def pred(args):
                     args.target_arch: vec.view(-1).cpu().tolist()
                 })
             pbar.update(vecs.size(0))
+        pbar.close()
     with open(args.pred_file, "w") as ostr:
         json.dump(predictions, ostr)
 

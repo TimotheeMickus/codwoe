@@ -46,10 +46,10 @@ def main(filename):
         if serials != list(range(1, len(ids)+1)):
             raise ValueError(f"File \"{filename}\": ids do not identify all items in dataset, submission will fail.")
         if track == "revdict":
-            vec_archs = set(item[0].keys()) - {"id", "gloss", "word", "pos", "concrete", "example", "f_rnk", "counts", "polysemous"}
+            vec_archs = set(items[0].keys()) - {"id", "gloss", "word", "pos", "concrete", "example", "f_rnk", "counts", "polysemous"}
             if len(vec_archs) == 0:
                 raise ValueError(f"File \"{filename}\": no vector architecture was found, revdict submission will fail.")
-            for item in item:
+            for item in items:
                 if not all(v in item for v in vec_archs):
                     raise ValueError(f"File \"{filename}\": some items do not contain all the expected vectors, revdict submission will fail.")
             if len(vec_archs - {"sgns", "char", "electra"}):

@@ -87,9 +87,9 @@ def train(args):
     vec_tensor_key = f"{args.source_arch}_tensor"
 
     # 4. train model
-    for epoch in tqdm.trange(EPOCHS, desc="Epoch", disable=None):
+    for epoch in tqdm.trange(EPOCHS, desc="Epochs"):
         ## train loop
-        pbar = tqdm.tqdm(desc=f"Train {epoch}", total=len(train_dataset), disable=None)
+        pbar = tqdm.tqdm(desc=f"Train {epoch}", total=len(train_dataset), disable=None, leave=False)
         for batch in train_dataloader:
             optimizer.zero_grad()
             vec = batch[vec_tensor_key].to(args.device)
@@ -101,10 +101,11 @@ def train(args):
             tokens = (gls != model.padding_idx)
             acc = (((pred.argmax(-1) == gls) & tokens).float().sum() / tokens.sum()).item()
             step = next(train_step)
-            summary_writer.add_scalar("train/loss", loss.item(), step)
-            summary_writer.add_scalar("train/acc", acc, step)
+            summary_writer.add_scalar("defmod-train/xent", loss.item(), step)
+            summary_writer.add_scalar("defmod-train/acc", acc, step)
             optimizer.step()
             pbar.update(vec.size(0))
+        pbar.close()
         ## eval loop
         if args.dev_file:
             model.eval()
@@ -112,7 +113,7 @@ def train(args):
                 sum_dev_loss = 0.0
                 sum_acc = 0
                 ntoks = 0
-                pbar = tqdm.tqdm(desc=f"Eval {epoch}", total=len(dev_dataset), disable=None)
+                pbar = tqdm.tqdm(desc=f"Eval {epoch}", total=len(dev_dataset), disable=None, leave=False)
                 for batch in dev_dataloader:
                     vec = batch[vec_tensor_key].to(args.device)
                     gls = batch["gloss_tensor"].to(args.device)
@@ -129,8 +130,9 @@ def train(args):
                     pbar.update(vec.size(0))
 
                 # keep track of the average loss & acc on dev set for this epoch
-                summary_writer.add_scalar("dev/loss", sum_dev_loss/ntoks, epoch)
-                summary_writer.add_scalar("dev/acc", sum_acc/ntoks, epoch)
+                summary_writer.add_scalar("defmod-dev/loss", sum_dev_loss/ntoks, epoch)
+                summary_writer.add_scalar("defmod-dev/acc", sum_acc/ntoks, epoch)
+                pbar.close()
             model.train()
 
     # 5. save result
@@ -161,6 +163,7 @@ def pred(args):
             for id, gloss in zip(batch["id"], test_dataset.decode(sequence)):
                 predictions.append({"id": id, "gloss": gloss})
             pbar.update(batch[vec_tensor_key].size(0))
+        pbar.close()
     # 3. dump predictions
     with open(args.pred_file, "w") as ostr:
         json.dump(predictions, ostr)

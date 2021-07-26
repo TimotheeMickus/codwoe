@@ -19,8 +19,12 @@ import moverscore_v2 as mv_sc
 from nltk.translate.bleu_score import sentence_bleu as bleu
 from nltk import word_tokenize as tokenize
 
+import numpy as np
+
 import torch
 import torch.nn.functional as F
+
+import tqdm
 
 import check_output
 
@@ -32,32 +36,25 @@ def get_parser(parser=argparse.ArgumentParser(description="score a submission"))
     return parser
 
 
-def mover_sentence_score(hypothesis, references, trace=0):
-    """From the MoverScore github"""
-    idf_dict_hyp = collections.defaultdict(lambda: 1.)
-    idf_dict_ref = collections.defaultdict(lambda: 1.)
-    hypothesis = [hypothesis] * len(references)
-    sentence_score = 0
-    scores = mv_sc.word_mover_score(references, hypothesis, idf_dict_ref, idf_dict_hyp, stop_words=[], n_gram=1, remove_subwords=False)
-    sentence_score = np.mean(scores)
-    if trace > 0:
-        print(hypothesis, references, sentence_score)
-    return sentence_score
-
-
 def mover_corpus_score(sys_stream, ref_streams, trace=0):
-    """From the MoverScore github"""
+    """Adapted from the MoverScore github"""
+
     if isinstance(sys_stream, str):
         sys_stream = [sys_stream]
     if isinstance(ref_streams, str):
         ref_streams = [[ref_streams]]
     fhs = [sys_stream] + ref_streams
     corpus_score = 0
+    pbar = tqdm.tqdm(desc="MvSc.", disable=None, total=len(sys_stream))
     for lines in itertools.zip_longest(*fhs):
         if None in lines:
             raise EOFError("Source and reference streams have different lengths!")
         hypo, *refs = lines
-        corpus_score += mover_sentence_score(hypo, refs, trace=0)
+        idf_dict_hyp = collections.defaultdict(lambda: 1.)
+        idf_dict_ref = collections.defaultdict(lambda: 1.)
+        corpus_score += mv_sc.word_mover_score(refs, [hypo], idf_dict_ref, idf_dict_hyp, stop_words=[], n_gram=1, remove_subwords=False)[0]
+        pbar.update()
+    pbar.close()
     corpus_score /= len(sys_stream)
     return corpus_score
 
@@ -75,23 +72,38 @@ def eval_defmod(args, summary):
 
     # 2. compute scores
     ## compute sense-level BLEU
+    id_to_lemma = {}
+    pbar = tqdm.tqdm(total=len(submission), desc="S-BLEU", disable=None)
     for sub, ref in zip(submission, reference):
-        assert (sub["word"], sub["pos"]) == (ref["word"], ref["pos"]), "Mismatch in submission and reference files!"
+        assert sub["id"] == ref["id"], "Mismatch in submission and reference files!"
         all_preds.append(sub["gloss"])
         all_tgts.append(ref["gloss"])
         sub["gloss"] = tokenize(sub["gloss"])
         ref["gloss"] = tokenize(ref["gloss"])
         sub["sense-BLEU"] = bleu([sub["gloss"]], ref["gloss"])
         reference_lemma_groups[(ref["word"], ref["pos"])].append(ref["gloss"])
+        id_to_lemma[sub["id"]] = (ref["word"], ref["pos"])
+        pbar.update()
+    pbar.close()
     ## compute lemma-level BLEU
-    for sub in submission:
+    for sub in tqdm.tqdm(submission, desc="L-BLEU", disable=None):
         sub["lemma-BLEU"] = max(
             bleu([sub["gloss"]], g)
-            for g in reference_lemma_groups[(sub["word"], sub["pos"])]
+            for g in reference_lemma_groups[id_to_lemma[sub["id"]]]
         )
     lemma_bleu_average = sum(s["lemma-BLEU"] for s in submission) / len(submission)
     sense_bleu_average = sum(s["sense-BLEU"] for s in submission) / len(submission)
     ## compute MoverScore
+    # moverscore_average = np.mean(mv_sc.word_mover_score(
+    #     all_tgts,
+    #     all_preds,
+    #     collections.defaultdict(lambda:1.),
+    #     collections.defaultdict(lambda:1.),
+    #     stop_words=[],
+    #     n_gram=1,
+    #     remove_subwords=False,
+    #     batch_size=1,
+    # ))
     moverscore_average = mover_corpus_score(all_preds, [all_tgts])
     # 3. write results
     logger.debug(f"Submission {args.submission_file}, \n\tMvSc.: " + \
@@ -124,7 +136,7 @@ def eval_revdict(args, summary):
 
     ## retrieve vectors
     for sub, ref in zip(submission, reference):
-        assert (sub["pos"], sub["gloss"]) == (ref["pos"], ref["gloss"]), "Mismatch in submission and reference files!"
+        assert sub["id"] == ref["id"], "Mismatch in submission and reference files!"
         for arch in vec_archs:
             all_preds[arch].append(sub[arch])
             all_refs[arch].append(ref[arch])
@@ -184,7 +196,7 @@ def main(args):
         args.output_file = args.output_file / "scores.txt"
     summary = check_output.main(args.submission_file)
 
-    args.reference_file = args.reference_files_dir / f"{summary.lang}.{summary.track}.test.json"
+    args.reference_file = args.reference_files_dir / f"{summary.lang}.test.{summary.track}.complete.json"
     eval_func = eval_revdict if summary.track == "revdict" else eval_defmod
     return eval_func(args, summary)
 
