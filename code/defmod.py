@@ -75,7 +75,7 @@ def train(args):
 
     # 3. declare optimizer & criterion
     ## Hyperparams
-    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 50, 1.e-4, .9, .999, 1.e-5
+    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 100, 1.e-4, .9, .999, 1.e-5
     optimizer = optim.AdamW(
         model.parameters(),
         lr=LEARNING_RATE,
@@ -130,7 +130,7 @@ def train(args):
                     pbar.update(vec.size(0))
 
                 # keep track of the average loss & acc on dev set for this epoch
-                summary_writer.add_scalar("defmod-dev/loss", sum_dev_loss/ntoks, epoch)
+                summary_writer.add_scalar("defmod-dev/xent", sum_dev_loss/ntoks, epoch)
                 summary_writer.add_scalar("defmod-dev/acc", sum_acc/ntoks, epoch)
                 pbar.close()
             model.train()
