@@ -74,7 +74,7 @@ def train(args):
 
     # 3. declare optimizer & criterion
     ## Hyperparams
-    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 100, 1.e-4, .9, .999, 1.e-5
+    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 10, 1.e-4, .9, .999, 1.e-5
     optimizer = optim.Adam(
         model.parameters(),
         lr=LEARNING_RATE,
@@ -160,7 +160,7 @@ def main(args):
         logger.debug("Performing revdict training")
         train(args)
     if args.do_pred:
-        logging.ino("Performing revdict prediction")
+        logging.debug("Performing revdict prediction")
         pred(args)
 
 if __name__ == "__main__":

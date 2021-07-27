@@ -105,11 +105,11 @@ def eval_defmod(args, summary):
     #     batch_size=1,
     # ))
     moverscore_average = mover_corpus_score(all_preds, [all_tgts])
-    # 3. write results
-    logger.debug(f"Submission {args.submission_file}, \n\tMvSc.: " + \
-        f"{moverscore_average}\n\tL-BLEU: {lemma_bleu_average}\n\tS-BLEU: " + \
-        f"{sense_bleu_average}"
-    )
+    # 3. write results.
+    # logger.debug(f"Submission {args.submission_file}, \n\tMvSc.: " + \
+    #     f"{moverscore_average}\n\tL-BLEU: {lemma_bleu_average}\n\tS-BLEU: " + \
+    #     f"{sense_bleu_average}"
+    # )
     with open(args.output_file, "w") as ostr:
         print(f"MoverScore_{summary.lang}:{moverscore_average}", file=ostr)
         print(f"BLEU_lemma_{summary.lang}:{lemma_bleu_average}", file=ostr)
@@ -120,7 +120,7 @@ def rank_cosine(preds, targets):
     assocs = preds @ F.normalize(targets).T
     refs = torch.diagonal(assocs, 0).unsqueeze(1)
     ranks = (assocs >= refs).sum(1).float().mean().item()
-    return ranks
+    return ranks / preds.size(0)
 
 def eval_revdict(args, summary):
     # 1. read contents
@@ -166,14 +166,14 @@ def eval_revdict(args, summary):
         for arch in vec_archs
     }
     # 3. display results
-    logger.debug(f"Submission {args.submission_file}, \n\tMSE: " + \
-        ", ".join(f"{a}={MSE_scores[a]}" for a in vec_archs) + \
-        ", \n\tcosine: " + \
-        ", ".join(f"{a}={cos_scores[a]}" for a in vec_archs) + \
-        ", \n\tcosine ranks: " + \
-        ", ".join(f"{a}={rnk_scores[a]}" for a in vec_archs) + \
-        "."
-    )
+    # logger.debug(f"Submission {args.submission_file}, \n\tMSE: " + \
+    #     ", ".join(f"{a}={MSE_scores[a]}" for a in vec_archs) + \
+    #     ", \n\tcosine: " + \
+    #     ", ".join(f"{a}={cos_scores[a]}" for a in vec_archs) + \
+    #     ", \n\tcosine ranks: " + \
+    #     ", ".join(f"{a}={rnk_scores[a]}" for a in vec_archs) + \
+    #     "."
+    # )
     # all_archs = sorted(set(reference[0].keys()) - {"id", "gloss", "word", "pos"})
     with open(args.output_file, "w") as ostr:
         for arch in vec_archs:
