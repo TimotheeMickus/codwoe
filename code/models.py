@@ -15,64 +15,59 @@ class PositionalEncoding(nn.Module):
         self.dropout = nn.Dropout(p=dropout)
         pe = torch.zeros(max_len, d_model)
         position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
-        div_term = torch.exp(torch.arange(0, d_model, 2).float()\
-            * (-math.log(10000.0) / d_model))
+        div_term = torch.exp(
+            torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model)
+        )
         pe[:, 0::2] = torch.sin(position * div_term)
         pe[:, 1::2] = torch.cos(position * div_term)
         pe = pe.unsqueeze(0).transpose(0, 1)
-        self.register_buffer('pe', pe)
+        self.register_buffer("pe", pe)
 
     def forward(self, x):
-        x = x + self.pe[:x.size(0)]
+        x = x + self.pe[: x.size(0)]
         return self.dropout(x)
 
 
 class DefmodModel(nn.Module):
     """A transformer architecture for Definition Modeling."""
-    def __init__(self, vocab, d_model=256, n_head=4, n_layers=6, dropout=0.25,
-    maxlen=128):
+
+    def __init__(
+        self, vocab, d_model=256, n_head=4, n_layers=6, dropout=0.25, maxlen=128
+    ):
         super(DefmodModel, self).__init__()
         self.d_model = d_model
         self.padding_idx = vocab[data.PAD]
         self.eos_idx = vocab[data.EOS]
         self.maxlen = maxlen
 
-        self.embedding = nn.Embedding(
-            len(vocab),
-            d_model,
-            padding_idx=self.padding_idx
-        )
+        self.embedding = nn.Embedding(len(vocab), d_model, padding_idx=self.padding_idx)
         self.positional_encoding = PositionalEncoding(
-            d_model,
-            dropout=dropout,
-            max_len=maxlen
+            d_model, dropout=dropout, max_len=maxlen
         )
         encoder_layer = nn.TransformerEncoderLayer(
-            d_model=d_model,
-            nhead=n_head,
-            dropout=dropout,
-            dim_feedforward=d_model * 2
+            d_model=d_model, nhead=n_head, dropout=dropout, dim_feedforward=d_model * 2
         )
         self.transformer_encoder = nn.TransformerEncoder(
-            encoder_layer,
-            num_layers=n_layers
+            encoder_layer, num_layers=n_layers
         )
         self.v_proj = nn.Linear(d_model, len(vocab))
         # initializing weights
         for name, param in self.named_parameters():
             if param.dim() > 1:
                 nn.init.xavier_uniform_(param)
-            elif 'bias' in name:
+            elif "bias" in name:
                 nn.init.zeros_(param)
-            else: # gain parameters of the layer norm
+            else:  # gain parameters of the layer norm
                 nn.init.ones_(param)
 
     def generate_square_subsequent_mask(self, sz):
         "from Pytorch"
         mask = (torch.triu(torch.ones(sz, sz)) == 1).transpose(0, 1)
-        mask = mask.float()\
-            .masked_fill(mask == 0, float('-inf'))\
+        mask = (
+            mask.float()
+            .masked_fill(mask == 0, float("-inf"))
             .masked_fill(mask == 1, float(0.0))
+        )
         return mask
 
     def forward(self, vector, input_sequence=None):
@@ -81,14 +76,15 @@ class DefmodModel(nn.Module):
         seq = torch.cat([vector.unsqueeze(0), embs], dim=0)
         src = self.positional_encoding(seq)
         src_mask = self.generate_square_subsequent_mask(src.size(0)).to(device)
-        src_key_padding_mask = torch.cat([
-            torch.tensor([[False] * input_sequence.size(1)]).to(device),
-            (input_sequence == self.padding_idx)
-        ], dim=0).t()
+        src_key_padding_mask = torch.cat(
+            [
+                torch.tensor([[False] * input_sequence.size(1)]).to(device),
+                (input_sequence == self.padding_idx),
+            ],
+            dim=0,
+        ).t()
         transformer_output = self.transformer_encoder(
-            src,
-            mask=src_mask,
-            src_key_padding_mask=src_key_padding_mask
+            src, mask=src_mask, src_key_padding_mask=src_key_padding_mask
         )
         v_dist = self.v_proj(transformer_output)
         return v_dist
@@ -111,18 +107,15 @@ class DefmodModel(nn.Module):
             src_mask = self.generate_square_subsequent_mask(src.size(0)).to(device)
             src_pe = self.positional_encoding(src)
             transformer_output = self.transformer_encoder(
-                src_pe,
-                mask=src_mask,
-                src_key_padding_mask=src_key_padding_mask.t()
+                src_pe, mask=src_mask, src_key_padding_mask=src_key_padding_mask.t()
             )[-1]
             v_dist = self.v_proj(transformer_output)
             new_symbol = v_dist.argmax(-1)
             new_symbol = new_symbol.masked_fill(has_stopped, self.padding_idx)
             generated_symbols.append(new_symbol)
-            src_key_padding_mask = torch.cat([
-                src_key_padding_mask,
-                has_stopped.unsqueeze(0)
-            ], dim=0)
+            src_key_padding_mask = torch.cat(
+                [src_key_padding_mask, has_stopped.unsqueeze(0)], dim=0
+            )
             has_stopped = has_stopped | (new_symbol == self.eos_idx)
             src = torch.cat([src, self.embedding(new_symbol).unsqueeze(0)], dim=0)
             if has_stopped.all():
@@ -133,54 +126,44 @@ class DefmodModel(nn.Module):
 
 class RevdictModel(nn.Module):
     """A transformer architecture for Definition Modeling."""
-    def __init__(self, vocab, d_model=256, n_head=4, n_layers=6, dropout=0.1,
-    maxlen=512):
+
+    def __init__(
+        self, vocab, d_model=256, n_head=4, n_layers=6, dropout=0.1, maxlen=512
+    ):
         super(RevdictModel, self).__init__()
         self.d_model = d_model
         self.padding_idx = vocab[data.PAD]
         self.eos_idx = vocab[data.EOS]
         self.maxlen = maxlen
 
-        self.embedding = nn.Embedding(
-            len(vocab),
-            d_model,
-            padding_idx=self.padding_idx
-        )
+        self.embedding = nn.Embedding(len(vocab), d_model, padding_idx=self.padding_idx)
         self.positional_encoding = PositionalEncoding(
-            d_model,
-            dropout=dropout,
-            max_len=maxlen
+            d_model, dropout=dropout, max_len=maxlen
         )
         encoder_layer = nn.TransformerEncoderLayer(
-            d_model=d_model,
-            nhead=n_head,
-            dropout=dropout,
-            dim_feedforward=d_model * 2
+            d_model=d_model, nhead=n_head, dropout=dropout, dim_feedforward=d_model * 2
         )
         self.transformer_encoder = nn.TransformerEncoder(
-            encoder_layer,
-            num_layers=n_layers
+            encoder_layer, num_layers=n_layers
         )
         self.e_proj = nn.Linear(d_model, d_model)
         for name, param in self.named_parameters():
             if param.dim() > 1:
                 nn.init.xavier_uniform_(param)
-            elif 'bias' in name:
+            elif "bias" in name:
                 nn.init.zeros_(param)
-            else: # gain parameters of the layer norm
+            else:  # gain parameters of the layer norm
                 nn.init.ones_(param)
 
     def forward(self, gloss_tensor):
-        src_key_padding_mask = (gloss_tensor == self.padding_idx)
+        src_key_padding_mask = gloss_tensor == self.padding_idx
         embs = self.embedding(gloss_tensor)
         src = self.positional_encoding(embs)
         transformer_output = self.transformer_encoder(
-            src,
-            src_key_padding_mask=src_key_padding_mask.t()
+            src, src_key_padding_mask=src_key_padding_mask.t()
         )
         summed_embs = transformer_output.masked_fill(
-            src_key_padding_mask.unsqueeze(-1),
-            0
+            src_key_padding_mask.unsqueeze(-1), 0
         ).sum(dim=0)
         return self.e_proj(F.relu(summed_embs))
 

@@ -7,16 +7,17 @@ import torch
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import DataLoader, Dataset, Sampler
 
-BOS="<seq>"
-EOS="</seq>"
-PAD="<pad/>"
-UNK="<unk/>"
+BOS = "<seq>"
+EOS = "</seq>"
+PAD = "<pad/>"
+UNK = "<unk/>"
 
 SUPPORTED_ARCHS = ("sgns", "char")
 
 # A dataset is a container object for the actual data
 class JSONDataset(Dataset):
     """Reads a CODWOE JSON dataset"""
+
     def __init__(self, file, vocab=None, freeze_vocab=False, maxlen=128):
         """
         Construct a torch.utils.data.Dataset compatible with torch data API and
@@ -31,7 +32,12 @@ class JSONDataset(Dataset):
         else:
             self.vocab = defaultdict(count(len(vocab)).__next__)
             self.vocab.update(vocab)
-        pad, eos, bos, unk = self.vocab[PAD], self.vocab[EOS], self.vocab[BOS], self.vocab[UNK]
+        pad, eos, bos, unk = (
+            self.vocab[PAD],
+            self.vocab[EOS],
+            self.vocab[BOS],
+            self.vocab[UNK],
+        )
         if freeze_vocab:
             self.vocab = dict(vocab)
         with open(file, "r") as istr:
@@ -39,11 +45,17 @@ class JSONDataset(Dataset):
         # preparse data
         for json_dict in self.items:
             # in definition modeling test datasets, gloss targets are absent
-            if "gloss" in  json_dict:
-                json_dict["gloss_tensor"] = torch.tensor([bos] + [
-                    self.vocab[word] if not freeze_vocab else self.vocab.get(word, unk)
-                    for word in json_dict["gloss"].split()
-                ] + [eos])
+            if "gloss" in json_dict:
+                json_dict["gloss_tensor"] = torch.tensor(
+                    [bos]
+                    + [
+                        self.vocab[word]
+                        if not freeze_vocab
+                        else self.vocab.get(word, unk)
+                        for word in json_dict["gloss"].split()
+                    ]
+                    + [eos]
+                )
                 if maxlen:
                     json_dict["gloss_tensor"] = json_dict["gloss_tensor"][:maxlen]
             # in reverse dictionary test datasets, vector targets are absent
@@ -63,8 +75,8 @@ class JSONDataset(Dataset):
     def __getitem__(self, index):
         return self.items[index]
 
-        # we're adding this method to simplify the code in our predictions of
-        # glosses
+    # we're adding this method to simplify the code in our predictions of
+    # glosses
     def decode(self, tensor):
         """Convert a sequence of indices (possibly batched) to tokens"""
         with torch.no_grad():
@@ -75,11 +87,9 @@ class JSONDataset(Dataset):
                     decoded.append(self.decode(tensor_))
                 return decoded
             else:
-                return " ".join([
-                    self.itos[i.item()]
-                    for i in tensor
-                    if i != self.vocab[PAD]
-                ])
+                return " ".join(
+                    [self.itos[i.item()] for i in tensor if i != self.vocab[PAD]]
+                )
 
     def save(self, file):
         torch.save(self, file)
@@ -88,19 +98,22 @@ class JSONDataset(Dataset):
     def load(file):
         return torch.load(file)
 
+
 # A sampler allows you to define how to select items from your Dataset. Torch
 # provides a number of default Sampler classes
 class TokenSampler(Sampler):
     """Produce batches with up to `batch_size` tokens in each batch"""
-    def __init__(self, dataset, batch_size=32, size_fn=len, drop_last=False,
-    shuffle=True):
-    """
-    args: `dataset` a torch.utils.data.Dataset (iterable style)
-          `batch_size` the maximum number of tokens in a batch
-          `size_fn` a callable that yields the number of tokens in a dataset item
-          `drop_last` if True and the data can't be divided in exactly the right number of batch, drop the last batch
-          `shuffle` if True, shuffle between every iteration
-    """
+
+    def __init__(
+        self, dataset, batch_size=32, size_fn=len, drop_last=False, shuffle=True
+    ):
+        """
+        args: `dataset` a torch.utils.data.Dataset (iterable style)
+              `batch_size` the maximum number of tokens in a batch
+              `size_fn` a callable that yields the number of tokens in a dataset item
+              `drop_last` if True and the data can't be divided in exactly the right number of batch, drop the last batch
+              `shuffle` if True, shuffle between every iteration
+        """
         self.dataset = dataset
         self.batch_size = batch_size
         self.size_fn = size_fn
@@ -129,11 +142,12 @@ class TokenSampler(Sampler):
 
     def __len__(self):
         if self._len is None:
-            self._len = sum(
-                self.sizing_fn(self.dataset[i])
-                for i in range(len(self.dataset))
-            ) // self.batch_size
+            self._len = (
+                sum(self.sizing_fn(self.dataset[i]) for i in range(len(self.dataset)))
+                // self.batch_size
+            )
         return self._len
+
 
 # DataLoaders give access to an iterator over the dataset, using a sampling
 # strategy as defined through a Sampler.
@@ -158,9 +172,7 @@ def get_dataloader(dataset, batch_size=128, shuffle=True):
                 batch[key].append(jdict[key])
         if has_gloss:
             batch["gloss_tensor"] = pad_sequence(
-                batch["gloss_tensor"],
-                padding_value=PAD_idx,
-                batch_first=False
+                batch["gloss_tensor"], padding_value=PAD_idx, batch_first=False
             )
         if has_vecs:
             for arch in SUPPORTED_ARCHS:
@@ -168,6 +180,7 @@ def get_dataloader(dataset, batch_size=128, shuffle=True):
         if has_electra:
             batch["electra_tensor"] = torch.stack(batch["electra_tensor"])
         return dict(batch)
+
     if dataset.has_gloss:
         # we try to keep the amount of gloss tokens roughly constant across all
         # batches.
@@ -179,18 +192,12 @@ def get_dataloader(dataset, batch_size=128, shuffle=True):
             dataset,
             collate_fn=do_collate,
             batch_sampler=TokenSampler(
-                dataset,
-                batch_size=batch_size,
-                size_fn=do_size_item,
-                shuffle=shuffle
+                dataset, batch_size=batch_size, size_fn=do_size_item, shuffle=shuffle
             ),
         )
     else:
         # there's no gloss, hence no gloss tokens, so we use a default batching
         # strategy.
         return DataLoader(
-            dataset,
-            collate_fn=do_collate,
-            batch_size=batch_size,
-            shuffle=shuffle
+            dataset, collate_fn=do_collate, batch_size=batch_size, shuffle=shuffle
         )
