@@ -35,13 +35,16 @@ is also a participants' [google group](http://example.org/). You can reach out
 to us organizer through [this mailing list](http://example.org/).
 
 # Using this repository
-To install the exact environment used for our scripts, use the dockerfile. You
-can also pull this docker image frome dockerhub:
-[`linguistickus/codwoe`](https://hub.docker.com/r/linguistickus/codwoe).
+To install the exact environment used for our scripts, see the
+`requirements.txt` file which lists the library we used. Do
+note that the exact installation in the competition underwent supplementary
+tweaks: in particular, we patch the moverscore library to have it run on CPU.
 
-Alternatively, the `requirements.txt` file also lists the library we use. Do
-note that docker will perform supplementary checks; in particular, we patch the
-moverscore library to have it run on CPU.
+Another possibility is to use the dockerfile written for the codalab
+competition. You can also pull this docker image frome dockerhub:
+[`linguistickus/codwoe`](https://hub.docker.com/r/linguistickus/codwoe). This
+Docker image doesn't contain the code, so you will also need to clone the
+repository within it; but this image will also contain our tweaks.
 
 Code useful to participants is stored in the `code/` directory.
 To see options a simple baseline on the definition modeling track, use:
@@ -63,6 +66,6 @@ $ python3 code/codwoe_entrypoint.py score $PATH_TO_SUBMISSION_FILE --reference_f
 Note that this requires the gold files, not available at the start of the
 competition.
 
-Other useful files to look at include `code/models.py`, where our baseline 
+Other useful files to look at include `code/models.py`, where our baseline
 architectures are defined, and `code/data.py`, which shows how to use the JSON
 datasets with the PyTorch dataset API.
