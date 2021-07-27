@@ -17,7 +17,7 @@ phases:
     start_date: 2021-07-31
     max_submissions: 999
     scoring_program: scoring_program.zip
-    reference_data: reference_data_1.zip
+    reference_data: reference_data.zip
     leaderboard_management_mode: hide_results
   2:
     phasenumber: 2
@@ -26,7 +26,7 @@ phases:
     start_date: 2022-01-10
     max_submissions: 50
     scoring_program: scoring_program.zip
-    reference_data: reference_data_2.zip
+    reference_data: reference_data.zip
     leaderboard_management_mode: hide_results
   3:
     phasenumber: 3
@@ -70,349 +70,349 @@ leaderboard:
       leaderboard: *DEFMOD
       column_group: *EN
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
     BLEU_sense_en:
       label: S-BLEU
       leaderboard: *DEFMOD
       column_group: *EN
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     BLEU_lemma_en:
       label: L-BLEU
       leaderboard: *DEFMOD
       column_group: *EN
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
       rank: 2
     MoverScore_es:
       label: MvSc.
       leaderboard: *DEFMOD
       column_group: *ES
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
     BLEU_sense_es:
       label: S-BLEU
       leaderboard: *DEFMOD
       column_group: *ES
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     BLEU_lemma_es:
       label: L-BLEU
       leaderboard: *DEFMOD
       column_group: *ES
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
     MoverScore_fr:
       label: MvSc.
       leaderboard: *DEFMOD
       column_group: *FR
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
     BLEU_sense_fr:
       label: S-BLEU
       leaderboard: *DEFMOD
       column_group: *FR
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     BLEU_lemma_fr:
       label: L-BLEU
       leaderboard: *DEFMOD
       column_group: *FR
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
     MoverScore_it:
       label: MvSc.
       leaderboard: *DEFMOD
       column_group: *IT
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
     BLEU_sense_it:
       label: S-BLEU
       leaderboard: *DEFMOD
       column_group: *IT
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     BLEU_lemma_it:
       label: L-BLEU
       leaderboard: *DEFMOD
       column_group: *IT
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
     MoverScore_ru:
       label: MvSc.
       leaderboard: *DEFMOD
       column_group: *RU
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
     BLEU_sense_ru:
       label: S-BLEU
       leaderboard: *DEFMOD
       column_group: *RU
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     BLEU_lemma_ru:
       label: L-BLEU
       leaderboard: *DEFMOD
       column_group: *RU
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
     MSE_en_sgns:
       label: MSE
       leaderboard: *REVDICT_SGNS
       column_group: *EN
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     cos_en_sgns:
       label: Cos
       leaderboard: *REVDICT_SGNS
       column_group: *EN
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     rnk_en_sgns:
       label: Rank
       leaderboard: *REVDICT_SGNS
       column_group: *EN
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     MSE_es_sgns:
       label: MSE
       leaderboard: *REVDICT_SGNS
       column_group: *ES
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     cos_es_sgns:
       label: Cos
       leaderboard: *REVDICT_SGNS
       column_group: *ES
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     rnk_es_sgns:
       label: Rank
       leaderboard: *REVDICT_SGNS
       column_group: *ES
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     MSE_fr_sgns:
       label: MSE
       leaderboard: *REVDICT_SGNS
       column_group: *FR
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     cos_fr_sgns:
       label: Cos
       leaderboard: *REVDICT_SGNS
       column_group: *FR
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     rnk_fr_sgns:
       label: Rank
       leaderboard: *REVDICT_SGNS
       column_group: *FR
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     MSE_it_sgns:
       label: MSE
       leaderboard: *REVDICT_SGNS
       column_group: *IT
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     cos_it_sgns:
       label: Cos
       leaderboard: *REVDICT_SGNS
       column_group: *IT
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     rnk_it_sgns:
       label: Rank
       leaderboard: *REVDICT_SGNS
       column_group: *IT
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     MSE_ru_sgns:
       label: MSE
       leaderboard: *REVDICT_SGNS
       column_group: *RU
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     cos_ru_sgns:
       label: Cos
       leaderboard: *REVDICT_SGNS
       column_group: *RU
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     rnk_ru_sgns:
       label: Rank
       leaderboard: *REVDICT_SGNS
       column_group: *RU
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     MSE_en_electra:
       label: MSE
       leaderboard: *REVDICT_ELECTRA
       column_group: *EN
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     cos_en_electra:
       label: Cos
       leaderboard: *REVDICT_ELECTRA
       column_group: *EN
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     rnk_en_electra:
       label: Rank
       leaderboard: *REVDICT_ELECTRA
       column_group: *EN
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     MSE_fr_electra:
       label: MSE
       leaderboard: *REVDICT_ELECTRA
       column_group: *FR
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     cos_fr_electra:
       label: Cos
       leaderboard: *REVDICT_ELECTRA
       column_group: *FR
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     rnk_fr_electra:
       label: Rank
       leaderboard: *REVDICT_ELECTRA
       column_group: *FR
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     MSE_ru_electra:
       label: MSE
       leaderboard: *REVDICT_ELECTRA
       column_group: *RU
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     cos_ru_electra:
       label: Cos
       leaderboard: *REVDICT_ELECTRA
       column_group: *RU
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     rnk_ru_electra:
       label: Rank
       leaderboard: *REVDICT_ELECTRA
       column_group: *RU
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     MSE_en_char:
       label: MSE
       leaderboard: *REVDICT_CHAR
       column_group: *EN
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     cos_en_char:
       label: Cos
       leaderboard: *REVDICT_CHAR
       column_group: *EN
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     rnk_en_char:
       label: Rank
       leaderboard: *REVDICT_CHAR
       column_group: *EN
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     MSE_es_char:
       label: MSE
       leaderboard: *REVDICT_CHAR
       column_group: *ES
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     cos_es_char:
       label: Cos
       leaderboard: *REVDICT_CHAR
       column_group: *ES
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     rnk_es_char:
       label: Rank
       leaderboard: *REVDICT_CHAR
       column_group: *ES
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     MSE_fr_char:
       label: MSE
       leaderboard: *REVDICT_CHAR
       column_group: *FR
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     cos_fr_char:
       label: Cos
       leaderboard: *REVDICT_CHAR
       column_group: *FR
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     rnk_fr_char:
       label: Rank
       leaderboard: *REVDICT_CHAR
       column_group: *FR
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     MSE_it_char:
       label: MSE
       leaderboard: *REVDICT_CHAR
       column_group: *IT
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     cos_it_char:
       label: Cos
       leaderboard: *REVDICT_CHAR
       column_group: *IT
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     rnk_it_char:
       label: Rank
       leaderboard: *REVDICT_CHAR
       column_group: *IT
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     MSE_ru_char:
       label: MSE
       leaderboard: *REVDICT_CHAR
       column_group: *RU
       rank: 1
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
     cos_ru_char:
       label: Cos
       leaderboard: *REVDICT_CHAR
       column_group: *RU
       rank: 2
-      numeric_format: 1
+      numeric_format: 3
     rnk_ru_char:
       label: Rank
       leaderboard: *REVDICT_CHAR
       column_group: *RU
       rank: 3
-      numeric_format: 1
+      numeric_format: 3
       sort: asc
