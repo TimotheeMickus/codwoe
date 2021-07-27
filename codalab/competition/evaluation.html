@@ -1,5 +1,136 @@
-<H3>Evaluation Criteria</H3>
+<h3>Evaluation Criteria</h3>
 
 <p>
-	This is the page that tells you how competition submissions will be evaluated and scored.
+	The evaluation script is available on our
+	<a href="https://git.atilf.fr/tmickus/codwoe/-/blob/master/code/score.py">
+	git repository</a> for reference. <b>Note that the complete dataset is
+	required to run all the metrics.</b> Metrics requiring the full dataset are
+	indicated as such in the list below. The complete dataset will be made
+	available at the end of the competition.
+</p>
+<p>
+	<b>Participants may not use any external resource.</b> This requirement is to
+	ensure that all submissions are easily comparable. We will ask participants
+	planning to submit a system description paper to forward a link to their code.
+</p>
+<p>
+	Participants will also be invited to contribute their systems' outputs to a
+	dataset of system productions. The purpose of this collection of system
+	productions is to propose them as a shared task for upcoming text generation
+	evaluation campaigns.
+</p>
+
+<h3>Metrics for the definition modeling track</h3>
+<p>
+	<b>Definition modeling</b> submissions are evaluated using three metrics:
+</p>
+<ul>
+	<li>
+		a <b>MoverScore</b>, appearing as <tt>MvSc.</tt> on the leaderboards; it is
+		computed using the original
+		<a href="https://github.com/AIPHES/emnlp19-moverscore">implementation</a> of
+		<a href="https://arxiv.org/pdf/1909.02622.pdf">Zhao et al. (2019)</a>.
+	</li>
+	<li>
+		a <b>BLEU score </b>, appearing as <tt>S-BLEU</tt> on the leaderboards. The
+		<tt>S</tt> here stands for "sense-level", as it is computed using the target
+		gloss as the sole reference for the production. We use the
+		<a href="https://www.nltk.org/_modules/nltk/translate/bleu_score.html">NLTK
+		implementation</a>.
+	</li>
+	<li>
+		a <b>lemma-level BLEU score </b>, appearing as <tt>L-BLEU</tt> on the
+		leaderboards. Concretely, we compute the BLEU score for that production and
+		all glosses with the same word and part of speech, and then select the
+		maximum score among these. We introduce this score as some definition
+		modeling examples share the same input (character-based embedding or
+		word2vec representation) and yet have different targets. The complete
+		dataset, which will be made available at the end of the competition, is
+		required to group entries per lemma. Again, we use the
+		<a href="https://www.nltk.org/_modules/nltk/translate/bleu_score.html">NLTK
+		implementation</a>.
+	</li>
+</ul>
+<p>
+	<b>Scoring a definition modeling submission using MoverScore on CPU takes some
+	time (15min or more).</b> Results may not be available immediately upon
+	submission.
+</p>
+<p>
+	Scores for distinct languages have different entries in the leaderboards.
+</p>
+<p>
+	Submissions to the definition modeling track must consist of a ZIP archive
+	containing a single JSON file. This JSON file must contain a list of JSON
+	objects, each of which must at least contain two keys: "id" and "gloss". The
+	id key is used to match submissions with references. The gloss key should map
+	to the string production to be evaluated. See our
+	<a href="https://git.atilf.fr/tmickus/codwoe/-/blob/master/code/defmod.py">
+	git repository</a> for an example.
+</p>
+<p>
+	Do not attempt to submit glosses for different languages in a single
+	submission. This will fail. Instead, make distinct submissions per language.
+</p>
+<p>
+	We strongly encourage you to check the format of your submission using our
+	<a href="https://git.atilf.fr/tmickus/codwoe/-/blob/master/code/check_output.py">
+	format checker</a> <b>before</b> submitting to CodaLab. This script will also
+	summarize how your submission will be understood by the scoring program.
+</p>
+
+<h3>Metrics for the reverse dictionary track</h3>
+<p>
+	<b>Reverse dictionary</b> submissions are evaluated using three metrics:
+</p>
+<ul>
+	<li>
+		<b>mean squared error</b> between the submission's reconstructed embedding
+		and the reference embedding
+	</li>
+	<li>
+		<b>cosine similarity</b> between the submission's reconstructed embedding
+		and the reference embedding
+	</li>
+	<li>
+		<b>cosine-based ranking</b> between the submission's reconstructed embedding
+		and the reference embedding; i.e., how many other test items have a	cosine
+		with the reconstructed embedding higher than that with the reference
+		embedding.
+	</li>
+</ul>
+<p>
+	Scores for distinct embeddings and languages have different entries in the
+	leaderboards.
+</p>
+<p>
+	Submissions to the definition modeling track must consist of a ZIP archive
+	containing a single JSON file. This JSON file must contain a list of JSON
+	objects, each of which must at least contain two keys: "id" and one among
+	"sgns", "char" or "electra", identifying which architecture your submission
+	tries to reconstruct. The "id" key is used to match submissions with
+	references. The other key(s) should map to the vector reconstruction to be
+	evaluated, as a list of float components. See our
+	<a href="https://git.atilf.fr/tmickus/codwoe/-/blob/master/code/revdict.py">
+	git repository</a> for an example.
+</p>
+<p>
+	Do not attempt to submit glosses for different languages in a single
+	submission. This will fail. Instead, make distinct submissions per language.
+	You may however submit reconstructions for multiple architectures in a single
+	submission.
+</p>
+<p>
+	We strongly encourage you to check the format of your submission using our
+	<a href="https://git.atilf.fr/tmickus/codwoe/-/blob/master/code/check_output.py">
+	format checker</a> <b>before</b> submitting to CodaLab. This script will also
+	summarize how your submission will be understood by the scoring program.
+</p>
+
+<h3>Manual evaluations</h3>
+<p>
+	We very strongly encourage participants to make use of the trial dataset for
+	running manual evaluations of their systems' production. The presence of a
+	manual evaluation in system descriptions will be taken into account during the
+	reviewing process.
 </p>

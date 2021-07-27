@@ -1,3 +1,40 @@
+<h3>Data links</h3>
+
 <p>
-	This is the data for the competition. It is to be used responsibly.
+	Data for the competition is available at XXX. The complete datasets will be
+	available after the end of the evaluation phase (January 31st).
+</p>
+
+<h3>Data format & contents</h3>
+<p>
+	All datasets are in JSON format. We minimize whitespace for memory consumption
+	purposes. Trial, training and development datasets for both definition
+	modeling and reverse dictionary tracks are shared: as the two tasks are
+	converse tasks, the	source for either one is the target of the other. Test
+	datasets will be	distinct, and have no overlap between the two tracks.
+</p>
+<p>
+	Datasets are available for the five following languages: EN, ES, FR, IT, RU.
+	Datasets are distinct per languages. All five languages contain embeddings for
+	two distinct types of architectures: "char" (character-based embeddings) and
+	"sgns" (word2vec Skip-Gram with Negative Sampling). EN, FR and RU have in
+	addition a third type of embedding available, namely "electra"
+	(Transformer-based contextual embeddings).
+</p>
+<p>
+	All embeddings for any given language were trained on the same corpus;
+	embedding training corpora across languages were designed to be comparable.
+	All computation details will be provided in the task description paper.
+</p>
+<p>
+	The trial dataset is annotated much more richly than the other datasets.
+	During the shared task, we will only provide gloss, id and embeddings. After
+	the evaluation phase, we will provide complete datasets, which will also
+	include the word being defined and its part of speech.
+</p>
+<p>
+	We very strongly encourage participants to reserve the trial dataset for
+	running manual evaluations of their systems' production. The presence of a
+	manual evaluation in system descriptions will be taken into account during the
+	reviewing process and discussed in the task paper.
 </p>

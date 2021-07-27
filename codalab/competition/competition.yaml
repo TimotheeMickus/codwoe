@@ -12,24 +12,28 @@ html:
 phases:
   1:
     phasenumber: 1
-    label: "Practice"
-    start_date: 2021-06-30
+    label: "Development"
+    color: blue
+    start_date: 2021-07-31
     max_submissions: 999
     scoring_program: scoring_program.zip
-    reference_data: reference_data.zip
-    leaderboard_management_mode: default
+    reference_data: reference_data_1.zip
+    leaderboard_management_mode: hide_results
   2:
     phasenumber: 2
     label: "Evaluation"
-    start_date: 2021-09-03
+    color: green
+    start_date: 2022-01-10
     max_submissions: 50
     scoring_program: scoring_program.zip
-    reference_data: reference_data.zip
+    reference_data: reference_data_2.zip
     leaderboard_management_mode: hide_results
   3:
     phasenumber: 3
     label: "Post-Evaluation"
+    color: purple
     start_date: 2022-02-01
+    phase_never_ends: True
     max_submissions: 999
     scoring_program: scoring_program.zip
     reference_data: reference_data.zip
@@ -171,6 +175,7 @@ leaderboard:
       column_group: *EN
       rank: 3
       numeric_format: 1
+      sort: asc
     MSE_es_sgns:
       label: MSE
       leaderboard: *REVDICT_SGNS
@@ -190,6 +195,7 @@ leaderboard:
       column_group: *ES
       rank: 3
       numeric_format: 1
+      sort: asc
     MSE_fr_sgns:
       label: MSE
       leaderboard: *REVDICT_SGNS
@@ -209,6 +215,7 @@ leaderboard:
       column_group: *FR
       rank: 3
       numeric_format: 1
+      sort: asc
     MSE_it_sgns:
       label: MSE
       leaderboard: *REVDICT_SGNS
@@ -228,6 +235,7 @@ leaderboard:
       column_group: *IT
       rank: 3
       numeric_format: 1
+      sort: asc
     MSE_ru_sgns:
       label: MSE
       leaderboard: *REVDICT_SGNS
@@ -247,6 +255,7 @@ leaderboard:
       column_group: *RU
       rank: 3
       numeric_format: 1
+      sort: asc
     MSE_en_electra:
       label: MSE
       leaderboard: *REVDICT_ELECTRA
@@ -266,6 +275,7 @@ leaderboard:
       column_group: *EN
       rank: 3
       numeric_format: 1
+      sort: asc
     MSE_fr_electra:
       label: MSE
       leaderboard: *REVDICT_ELECTRA
@@ -285,6 +295,7 @@ leaderboard:
       column_group: *FR
       rank: 3
       numeric_format: 1
+      sort: asc
     MSE_ru_electra:
       label: MSE
       leaderboard: *REVDICT_ELECTRA
@@ -304,6 +315,7 @@ leaderboard:
       column_group: *RU
       rank: 3
       numeric_format: 1
+      sort: asc
     MSE_en_char:
       label: MSE
       leaderboard: *REVDICT_CHAR
@@ -323,6 +335,7 @@ leaderboard:
       column_group: *EN
       rank: 3
       numeric_format: 1
+      sort: asc
     MSE_es_char:
       label: MSE
       leaderboard: *REVDICT_CHAR
@@ -342,6 +355,7 @@ leaderboard:
       column_group: *ES
       rank: 3
       numeric_format: 1
+      sort: asc
     MSE_fr_char:
       label: MSE
       leaderboard: *REVDICT_CHAR
@@ -361,6 +375,7 @@ leaderboard:
       column_group: *FR
       rank: 3
       numeric_format: 1
+      sort: asc
     MSE_it_char:
       label: MSE
       leaderboard: *REVDICT_CHAR
@@ -380,6 +395,7 @@ leaderboard:
       column_group: *IT
       rank: 3
       numeric_format: 1
+      sort: asc
     MSE_ru_char:
       label: MSE
       leaderboard: *REVDICT_CHAR
@@ -399,3 +415,4 @@ leaderboard:
       column_group: *RU
       rank: 3
       numeric_format: 1
+      sort: asc
