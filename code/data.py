@@ -18,7 +18,7 @@ SUPPORTED_ARCHS = ("sgns", "char")
 class JSONDataset(Dataset):
     """Reads a CODWOE JSON dataset"""
 
-    def __init__(self, file, vocab=None, freeze_vocab=False, maxlen=128):
+    def __init__(self, file, vocab=None, freeze_vocab=False, maxlen=256):
         """
         Construct a torch.utils.data.Dataset compatible with torch data API and
         codwoe data.
@@ -105,7 +105,7 @@ class TokenSampler(Sampler):
     """Produce batches with up to `batch_size` tokens in each batch"""
 
     def __init__(
-        self, dataset, batch_size=32, size_fn=len, drop_last=False, shuffle=True
+        self, dataset, batch_size=200, size_fn=len, drop_last=False, shuffle=True
     ):
         """
         args: `dataset` a torch.utils.data.Dataset (iterable style)
@@ -151,7 +151,7 @@ class TokenSampler(Sampler):
 
 # DataLoaders give access to an iterator over the dataset, using a sampling
 # strategy as defined through a Sampler.
-def get_dataloader(dataset, batch_size=128, shuffle=True):
+def get_dataloader(dataset, batch_size=200, shuffle=True):
     """produce dataloader.
     args: `dataset` a torch.utils.data.Dataset (iterable style)
           `batch_size` the maximum number of tokens in a batch

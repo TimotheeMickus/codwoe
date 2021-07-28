@@ -32,7 +32,7 @@ class DefmodModel(nn.Module):
     """A transformer architecture for Definition Modeling."""
 
     def __init__(
-        self, vocab, d_model=256, n_head=4, n_layers=6, dropout=0.25, maxlen=128
+        self, vocab, d_model=256, n_head=4, n_layers=4, dropout=0.3, maxlen=256
     ):
         super(DefmodModel, self).__init__()
         self.d_model = d_model

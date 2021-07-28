@@ -108,7 +108,7 @@ def train(args):
 
     # 3. declare optimizer & criterion
     ## Hyperparams
-    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 10, 1.0e-4, 0.9, 0.999, 1.0e-5
+    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 10, 1.0e-5, 0.9, 0.999, 1.0e-5
     optimizer = optim.AdamW(
         model.parameters(),
         lr=LEARNING_RATE,

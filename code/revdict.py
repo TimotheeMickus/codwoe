@@ -96,8 +96,8 @@ def train(args):
         else:
             assert dev_dataset.has_vecs, "Development dataset contains no vector."
     ## make dataloader
-    train_dataloader = data.get_dataloader(train_dataset, batch_size=1024)
-    dev_dataloader = data.get_dataloader(dev_dataset, shuffle=False, batch_size=2048)
+    train_dataloader = data.get_dataloader(train_dataset, batch_size=512)
+    dev_dataloader = data.get_dataloader(dev_dataset, shuffle=False, batch_size=1024)
     ## make summary writer
     summary_writer = SummaryWriter(args.summary_logdir)
     train_step = itertools.count()  # to keep track of the training steps for logging
@@ -110,7 +110,7 @@ def train(args):
 
     # 3. declare optimizer & criterion
     ## Hyperparams
-    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 10, 1.0e-4, 0.9, 0.999, 1.0e-5
+    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 10, 1.0e-3, 0.9, 0.999, 1.0e-5
     optimizer = optim.Adam(
         model.parameters(),
         lr=LEARNING_RATE,
@@ -189,7 +189,7 @@ def pred(args):
     test_dataset = data.JSONDataset(
         args.test_file, vocab=train_vocab, freeze_vocab=True, maxlen=model.maxlen
     )
-    test_dataloader = data.get_dataloader(test_dataset, shuffle=False, batch_size=2048)
+    test_dataloader = data.get_dataloader(test_dataset, shuffle=False, batch_size=1024)
     model.eval()
     vec_tensor_key = f"{args.target_arch}_tensor"
     assert test_dataset.has_gloss, "File is not usable for the task"
