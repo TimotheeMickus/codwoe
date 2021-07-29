@@ -30,8 +30,9 @@ sequence-to-vector task—and you know that kind of thing gets NLP people sweari
 out loud. These tasks are also useful for explainable AI, since they involve
 converting human-readable data into machine-readable data and back.
 
-To get involved: check out the [codalab competition](http://example.org/). There
-is also a participants'
+To get involved: check out the
+[codalab competition](https://competitions.codalab.org/competitions/34022).
+There is also a participants'
 ["semeval2022-dictionaries-and-word-embeddings" google group](mailto:semeval2022-dictionaries-and-word-embeddings@googlegroups.com).
 You can reach us organizers through [this email](mailto:tmickus@atilf.fr); make
 sure to mention SemEval in your email object.
