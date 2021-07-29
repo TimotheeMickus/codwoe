@@ -43,7 +43,7 @@ note that the exact installation in the competition underwent supplementary
 tweaks: in particular, we patch the moverscore library to have it run on CPU.
 
 Another possibility is to use the dockerfile written for the codalab
-competition. You can also pull this docker image frome dockerhub:
+competition. You can also pull this docker image from dockerhub:
 [`linguistickus/codwoe`](https://hub.docker.com/r/linguistickus/codwoe). This
 Docker image doesn't contain the code, so you will also need to clone the
 repository within it; but this image will also contain our tweaks.
