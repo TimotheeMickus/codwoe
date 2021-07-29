@@ -32,7 +32,11 @@ import check_output
 
 
 def get_parser(parser=argparse.ArgumentParser(description="score a submission")):
-    parser.add_argument("submission_file", type=pathlib.Path, help="file to check")
+    parser.add_argument(
+        "submission_path",
+        type=pathlib.Path,
+        help="path to submission file to be scored, or to a directory of submissions to be scored",
+    )
     parser.add_argument(
         "--reference_files_dir",
         type=pathlib.Path,
@@ -92,6 +96,7 @@ def eval_defmod(args, summary):
 
     # 2. compute scores
     ## compute sense-level BLEU
+    assert len(submission) == len(reference), "Missing items in submission!"
     id_to_lemma = {}
     pbar = tqdm.tqdm(total=len(submission), desc="S-BLEU", disable=None)
     for sub, ref in zip(submission, reference):
@@ -130,7 +135,7 @@ def eval_defmod(args, summary):
     #     f"{moverscore_average}\n\tL-BLEU: {lemma_bleu_average}\n\tS-BLEU: " + \
     #     f"{sense_bleu_average}"
     # )
-    with open(args.output_file, "w") as ostr:
+    with open(args.output_file, "a") as ostr:
         print(f"MoverScore_{summary.lang}:{moverscore_average}", file=ostr)
         print(f"BLEU_lemma_{summary.lang}:{lemma_bleu_average}", file=ostr)
         print(f"BLEU_sense_{summary.lang}:{sense_bleu_average}", file=ostr)
@@ -174,6 +179,7 @@ def eval_revdict(args, summary):
     all_preds = collections.defaultdict(list)
     all_refs = collections.defaultdict(list)
 
+    assert len(submission) == len(reference), "Missing items in submission!"
     ## retrieve vectors
     for sub, ref in zip(submission, reference):
         assert sub["id"] == ref["id"], "Mismatch in submission and reference files!"
@@ -206,7 +212,7 @@ def eval_revdict(args, summary):
     #     "."
     # )
     # all_archs = sorted(set(reference[0].keys()) - {"id", "gloss", "word", "pos"})
-    with open(args.output_file, "w") as ostr:
+    with open(args.output_file, "a") as ostr:
         for arch in vec_archs:
             print(f"MSE_{summary.lang}_{arch}:{MSE_scores[arch]}", file=ostr)
             print(f"cos_{summary.lang}_{arch}:{cos_scores[arch]}", file=ostr)
@@ -219,21 +225,33 @@ def eval_revdict(args, summary):
 
 
 def main(args):
-    if args.submission_file.is_dir():
-        files = list(args.submission_file.glob("*.json"))
-        assert (
-            len(files) == 1
-        ), "invalid submission: should contain exactly one JSON file."
-        args.submission_file = files[0]
+    def do_score(submission_file, summary):
+        args.submission_file = submission_file
+        args.reference_file = (
+            args.reference_files_dir
+            / f"{summary.lang}.test.{summary.track}.complete.json"
+        )
+        eval_func = eval_revdict if summary.track == "revdict" else eval_defmod
+        eval_func(args, summary)
+
     if args.output_file.is_dir():
         args.output_file = args.output_file / "scores.txt"
-    summary = check_output.main(args.submission_file)
-
-    args.reference_file = (
-        args.reference_files_dir / f"{summary.lang}.test.{summary.track}.complete.json"
-    )
-    eval_func = eval_revdict if summary.track == "revdict" else eval_defmod
-    return eval_func(args, summary)
+    # wipe file if exists
+    open(args.output_file, "w").close()
+    if args.submission_path.is_dir():
+        files = list(args.submission_path.glob("*.json"))
+        assert len(files) >= 1, "No data to score!"
+        summaries = [check_output.main(f) for f in files]
+        assert len(set(summaries)) == len(files), "Ensure files map to unique setups."
+        rd_cfg = [
+            (s.lang, a) for s in summary for a in s.vec_archs if s.track == "revdict"
+        ]
+        assert len(set(rd_cfg)) == len(rd_cfg), "Ensure files map to unique setups."
+        for summary, submitted_file in zip(summaries, files):
+            do_score(submitted_file, summary)
+    else:
+        summary = check_output.main(args.submission_path)
+        do_score(args.submission_path, summary)
 
 
 if __name__ == "__main__":

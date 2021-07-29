@@ -128,7 +128,7 @@ class RevdictModel(nn.Module):
     """A transformer architecture for Definition Modeling."""
 
     def __init__(
-        self, vocab, d_model=256, n_head=4, n_layers=6, dropout=0.1, maxlen=512
+        self, vocab, d_model=256, n_head=4, n_layers=4, dropout=0.3, maxlen=512
     ):
         super(RevdictModel, self).__init__()
         self.d_model = d_model
@@ -146,6 +146,7 @@ class RevdictModel(nn.Module):
         self.transformer_encoder = nn.TransformerEncoder(
             encoder_layer, num_layers=n_layers
         )
+        self.dropout = nn.Dropout(p=dropout)
         self.e_proj = nn.Linear(d_model, d_model)
         for name, param in self.named_parameters():
             if param.dim() > 1:
@@ -159,8 +160,8 @@ class RevdictModel(nn.Module):
         src_key_padding_mask = gloss_tensor == self.padding_idx
         embs = self.embedding(gloss_tensor)
         src = self.positional_encoding(embs)
-        transformer_output = self.transformer_encoder(
-            src, src_key_padding_mask=src_key_padding_mask.t()
+        transformer_output = self.dropout(
+            self.transformer_encoder(src, src_key_padding_mask=src_key_padding_mask.t())
         )
         summed_embs = transformer_output.masked_fill(
             src_key_padding_mask.unsqueeze(-1), 0

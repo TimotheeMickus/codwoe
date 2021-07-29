@@ -110,8 +110,8 @@ def train(args):
 
     # 3. declare optimizer & criterion
     ## Hyperparams
-    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 10, 1.0e-3, 0.9, 0.999, 1.0e-5
-    optimizer = optim.Adam(
+    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 10, 1.0e-4, 0.9, 0.999, 1.0e-6
+    optimizer = optim.AdamW(
         model.parameters(),
         lr=LEARNING_RATE,
         betas=(BETA1, BETA2),
@@ -214,7 +214,7 @@ def main(args):
         logger.debug("Performing revdict training")
         train(args)
     if args.do_pred:
-        logging.debug("Performing revdict prediction")
+        logger.debug("Performing revdict prediction")
         pred(args)
 
 

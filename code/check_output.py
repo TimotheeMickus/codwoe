@@ -100,6 +100,7 @@ def main(filename):
             + f"\tSubmission on track {track} for language {lang}, {len(ids)} predictions.\n"
         )
         if track == "revdict":
+            vec_archs = tuple(sorted(vec_archs))
             ok_message += (
                 f'\tSubmission predicts these embeddings: {", ".join(vec_archs)}.'
             )

@@ -108,7 +108,7 @@ def train(args):
 
     # 3. declare optimizer & criterion
     ## Hyperparams
-    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 10, 1.0e-5, 0.9, 0.999, 1.0e-5
+    EPOCHS, LEARNING_RATE, BETA1, BETA2, WEIGHT_DECAY = 10, 1.0e-4, 0.9, 0.999, 1.0e-6
     optimizer = optim.AdamW(
         model.parameters(),
         lr=LEARNING_RATE,
@@ -211,7 +211,7 @@ def pred(args):
             pbar.update(batch[vec_tensor_key].size(0))
         pbar.close()
     # 3. dump predictions
-    with open(args.pred_file, "w") as ostr:
+    with open(args.pred_file, "a") as ostr:
         json.dump(predictions, ostr)
 
 
