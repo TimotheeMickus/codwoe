@@ -32,7 +32,7 @@ converting human-readable data into machine-readable data and back.
 
 To get involved: check out the [codalab competition](http://example.org/). There
 is also a participants'
-["semeval2022-dictionaries-and-word-embeddings" google group](semeval2022-dictionaries-and-word-embeddings@googlegroups.com).
+["semeval2022-dictionaries-and-word-embeddings" google group](mailto:semeval2022-dictionaries-and-word-embeddings@googlegroups.com).
 You can reach us organizers through [this email](mailto:tmickus@atilf.fr); make
 sure to mention SemEval in your email object.
 
