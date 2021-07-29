@@ -13,7 +13,7 @@ few simple baseline architectures. It is also the exact copy of what is used on
 the codalab.
 
 Will be added to this repository at a later date: data or link to the data for
-the competition, code for training our models, and results.
+the competition, code for training our models, and official results.
 
 # What is this task?
 The CODWOE shared task invites you to compare two types of semantic
@@ -31,8 +31,10 @@ out loud. These tasks are also useful for explainable AI, since they involve
 converting human-readable data into machine-readable data and back.
 
 To get involved: check out the [codalab competition](http://example.org/). There
-is also a participants' [google group](http://example.org/). You can reach out
-to us organizer through [this mailing list](http://example.org/).
+is also a participants'
+["semeval2022-dictionaries-and-word-embeddings" google group](semeval2022-dictionaries-and-word-embeddings@googlegroups.com).
+You can reach us organizers through [this email](mailto:tmickus@atilf.fr); make
+sure to mention SemEval in your email object.
 
 # Using this repository
 To install the exact environment used for our scripts, see the
