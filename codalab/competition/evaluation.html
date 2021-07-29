@@ -62,16 +62,25 @@
 </p>
 <p>
 	Submissions to the definition modeling track must consist of a ZIP archive
-	containing a single JSON file. This JSON file must contain a list of JSON
-	objects, each of which must at least contain two keys: "id" and "gloss". The
-	id key is used to match submissions with references. The gloss key should map
-	to the string production to be evaluated. See our
+	containing one or more JSON files. These JSON files must contain a list of
+	JSON objects, each of which must at least contain two keys: "id" and "gloss".
+	The id key is used to match submissions with references. The gloss key should
+	map to the string production to be evaluated. See our
 	<a href="https://git.atilf.fr/tmickus/codwoe/-/blob/master/code/defmod.py">
-	git repository</a> for an example.
+	git repository</a> for an example architecture that can output the correct
+	JSON format.
 </p>
 <p>
-	Do not attempt to submit glosses for different languages in a single
-	submission. This will fail. Instead, make distinct submissions per language.
+	To have your outputs scored, create a ZIP archive containing all the files you
+	wish to submit, and upload it on CodaLab during the Evaluation phase. You can
+	submit files for both tracks (definition modeling and reverse dictionary) at
+	once in a single ZIP archive. Make sure that setups are unique: do not include
+	two JSON files containing predictions for the same pair of track and language.
+</p>
+<p>
+	Do not attempt to submit glosses for different languages with a single JSON
+	submission file. This will fail. Instead, make distinct submission files per
+	language.
 </p>
 <p>
 	We strongly encourage you to check the format of your submission using our
@@ -106,21 +115,30 @@
 	paper.
 </p>
 <p>
-	Submissions to the definition modeling track must consist of a ZIP archive
-	containing a single JSON file. This JSON file must contain a list of JSON
-	objects, each of which must at least contain two keys: "id" and one among
+	Submissions to the reverse dictionary track must consist of a ZIP archive
+	containing one or more JSON files. These JSON files must contain a list of
+	JSON objects, each of which must at least contain two keys: "id" and one among
 	"sgns", "char" or "electra", identifying which architecture your submission
 	tries to reconstruct. The "id" key is used to match submissions with
 	references. The other key(s) should map to the vector reconstruction to be
 	evaluated, as a list of float components. See our
 	<a href="https://git.atilf.fr/tmickus/codwoe/-/blob/master/code/revdict.py">
-	git repository</a> for an example.
+	git repository</a> for an example architecture that can output the correct
+	JSON format.
 </p>
 <p>
-	Do not attempt to submit glosses for different languages in a single
-	submission. This will fail. Instead, make distinct submissions per language.
-	You may however submit reconstructions for multiple architectures in a single
-	submission.
+	To have your outputs scored, create a ZIP archive containing all the files you
+	wish to submit, and upload it on CodaLab during the Evaluation phase. You can
+	submit files for both tracks (reverse dictionary and definition modeling) at
+	once in a single ZIP archive. Make sure that setups are unique: do not include
+	two JSON files containing predictions for the same configuration of track,
+	language and embedding architecture.
+</p>
+<p>
+	Do not attempt to submit embeddings for different languages in a single JSON
+	submission. This will fail. Instead, make distinct submission files per
+	language. You may however group reconstructions for multiple architectures in
+	a single submission file.
 </p>
 <p>
 	We strongly encourage you to check the format of your submission using our

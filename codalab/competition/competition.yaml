@@ -1,5 +1,5 @@
 title: CODWOE - Comparing Dictionaries and Word Embeddings
-description: Are dictionary glosses and word embedding representations semantically equivalent and can we generate one from the other?
+description: SemEval 2022 Task 1 - Are dictionary glosses and word embedding representations semantically equivalent? Can we generate one from the other?
 image: codwoe-logo.png
 has_registration: True
 allow_teams: True
