@@ -244,7 +244,7 @@ def main(args):
         summaries = [check_output.main(f) for f in files]
         assert len(set(summaries)) == len(files), "Ensure files map to unique setups."
         rd_cfg = [
-            (s.lang, a) for s in summary for a in s.vec_archs if s.track == "revdict"
+            (s.lang, a) for s in summaries if s.track == "revdict" for a in s.vec_archs 
         ]
         assert len(set(rd_cfg)) == len(rd_cfg), "Ensure files map to unique setups."
         for summary, submitted_file in zip(summaries, files):
