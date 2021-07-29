@@ -12,24 +12,15 @@ html:
 phases:
   1:
     phasenumber: 1
-    label: "Development"
-    color: blue
-    start_date: 2021-07-31
-    max_submissions: 999
-    scoring_program: scoring_program.zip
-    reference_data: reference_data.zip
-    leaderboard_management_mode: hide_results
-  2:
-    phasenumber: 2
     label: "Evaluation"
-    color: green
+    color: blue
     start_date: 2022-01-10
     max_submissions: 50
     scoring_program: scoring_program.zip
     reference_data: reference_data.zip
     leaderboard_management_mode: hide_results
-  3:
-    phasenumber: 3
+  2:
+    phasenumber: 2
     label: "Post-Evaluation"
     color: purple
     start_date: 2022-02-01
