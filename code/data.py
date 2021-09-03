@@ -132,7 +132,8 @@ class TokenSampler(Sampler):
         longest_len = 0
         for i in indices:
             if numel + self.size_fn(self.dataset[i]) > self.batch_size:
-                yield selected
+                if selected:
+                    yield selected
                 selected = []
                 numel = 0
             numel += self.size_fn(self.dataset[i])
@@ -143,7 +144,7 @@ class TokenSampler(Sampler):
     def __len__(self):
         if self._len is None:
             self._len = (
-                sum(self.sizing_fn(self.dataset[i]) for i in range(len(self.dataset)))
+                sum(self.size_fn(self.dataset[i]) for i in range(len(self.dataset)))
                 // self.batch_size
             )
         return self._len
