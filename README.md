@@ -12,8 +12,9 @@ a number of useful features, such as scoring submissions, a format checker and a
 few simple baseline architectures. It is also the exact copy of what is used on
 the codalab.
 
-Will be added to this repository at a later date: data or link to the data for
-the competition, code for training our models, and official results.
+We provide data using git LFS. Make sure to install the relevant software if you
+wish to clone this repository: see the documentation 
+[here](https://git-lfs.github.com/).
 
 # What is this task?
 The CODWOE shared task invites you to compare two types of semantic
