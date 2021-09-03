@@ -7,3 +7,4 @@ data/*
 *.zip
 scores.txt
 !data/trial-data_all.zip
+!data/train-data_all.zip
