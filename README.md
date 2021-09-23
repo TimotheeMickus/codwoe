@@ -35,7 +35,7 @@ To get involved: check out the
 [codalab competition](https://competitions.codalab.org/competitions/34022).
 There is also a participants'
 ["semeval2022-dictionaries-and-word-embeddings" google group](mailto:semeval2022-dictionaries-and-word-embeddings@googlegroups.com),
-as well as a [discord server](https://discord.gg/y8g6qXakNs)
+as well as a [discord server](https://discord.gg/y8g6qXakNs).
 You can reach us organizers through [this email](mailto:tmickus@atilf.fr); make
 sure to mention SemEval in your email object.
 
