@@ -81,3 +81,10 @@ In the reverse dictionary, participants should construct JSON files that contain
  + any of the valid embeddings ("char", "sgns", or "electra" key in EN/FR/RU)
 
 Other keys can be added. More details concerning the evaluation procedure are available here: [link](https://competitions.codalab.org/competitions/34022#learn_the_details-evaluation).
+
+## License Information
+
+The complete datasets, embedding architectures and embedding models will be made publicly available after the evaluation phase under a CC-BY-SA license. Please link to the competition website page ([link](https://competitions.codalab.org/competitions/34022)) and cite our upcoming task description paper if you use these datasets in your own work.
+
+Dictionary data has been extracted from dumps provided by [Sérasset (2014)](http://kaiko.getalp.org/about-dbnary/). Embeddings were trained specifically for this shared task; all details will be made available in the task description paper.
+
