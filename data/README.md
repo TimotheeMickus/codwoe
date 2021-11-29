@@ -1,3 +1,7 @@
+# Dataset access.
+
+**The datasets are available at the following page: [https://codwoe.atilf.fr/](https://codwoe.atilf.fr/).**
+
 # Dataset structure
 
 This document details the structure of the JSON dataset file we provide. More information is available on the competition website: [link](https://competitions.codalab.org/competitions/34022#participate-get_data).
