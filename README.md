@@ -12,9 +12,11 @@ a number of useful features, such as scoring submissions, a format checker and a
 few simple baseline architectures. It is also the exact copy of what is used on
 the codalab.
 
-We provide data using git LFS. Make sure to install the relevant software if you
+<!-- We provide data using git LFS. Make sure to install the relevant software if you
 wish to clone this repository: see the documentation
-[here](https://git-lfs.github.com/).
+[here](https://git-lfs.github.com/). -->
+
+**Datasets are no longer provided directly on this repository. The competition datasets are now available on this page: [https://codwoe.atilf.fr/](https://codwoe.atilf.fr/).**
 
 # What is this task?
 The CODWOE shared task invites you to compare two types of semantic
@@ -122,6 +124,8 @@ architectures are defined, and `code/data.py`, which shows how to use the JSON
 datasets with the PyTorch dataset API.
 
 # Using the datasets
+
+**Datasets are no longer provided directly on this repository. The competition datasets are now available on this page: [https://codwoe.atilf.fr/](https://codwoe.atilf.fr/).**
 
 This section details the structure of the JSON dataset file we provide. More information is available on the competition website: [link](https://competitions.codalab.org/competitions/34022#participate-get_data).
 
