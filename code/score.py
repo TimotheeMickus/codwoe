@@ -18,7 +18,8 @@ logger.addHandler(handler)
 os.environ["MOVERSCORE_MODEL"] = "distilbert-base-multilingual-cased"
 import moverscore_v2 as mv_sc
 
-from nltk.translate.bleu_score import sentence_bleu as bleu
+from nltk.translate.bleu_score import sentence_bleu
+from nltk.translate.bleu_score import SmoothingFunction
 from nltk import word_tokenize as tokenize
 
 import numpy as np
@@ -50,6 +51,9 @@ def get_parser(parser=argparse.ArgumentParser(description="score a submission"))
         default=pathlib.Path("scores.txt"),
     )
     return parser
+
+def bleu(pred, target, smoothing_function=SmoothingFunction().method4):
+    return sentence_bleu([pred], target, smoothing_function=smoothing_function)
 
 
 def mover_corpus_score(sys_stream, ref_streams, trace=0):
@@ -105,7 +109,7 @@ def eval_defmod(args, summary):
         all_tgts.append(ref["gloss"])
         sub["gloss"] = tokenize(sub["gloss"])
         ref["gloss"] = tokenize(ref["gloss"])
-        sub["sense-BLEU"] = bleu([sub["gloss"]], ref["gloss"])
+        sub["sense-BLEU"] = bleu(sub["gloss"], ref["gloss"])
         reference_lemma_groups[(ref["word"], ref["pos"])].append(ref["gloss"])
         id_to_lemma[sub["id"]] = (ref["word"], ref["pos"])
         pbar.update()
@@ -113,7 +117,7 @@ def eval_defmod(args, summary):
     ## compute lemma-level BLEU
     for sub in tqdm.tqdm(submission, desc="L-BLEU", disable=None):
         sub["lemma-BLEU"] = max(
-            bleu([sub["gloss"]], g)
+            bleu(sub["gloss"], g)
             for g in reference_lemma_groups[id_to_lemma[sub["id"]]]
         )
     lemma_bleu_average = sum(s["lemma-BLEU"] for s in submission) / len(submission)
@@ -148,9 +152,10 @@ def eval_defmod(args, summary):
 
 
 def rank_cosine(preds, targets):
-    assocs = preds @ F.normalize(targets).T
+    assocs = F.normalize(preds) @ F.normalize(targets).T
     refs = torch.diagonal(assocs, 0).unsqueeze(1)
     ranks = (assocs >= refs).sum(1).float().mean().item()
+    assert ranks.numel() == preds.size(0)
     return ranks / preds.size(0)
 
 
@@ -244,7 +249,7 @@ def main(args):
         summaries = [check_output.main(f) for f in files]
         assert len(set(summaries)) == len(files), "Ensure files map to unique setups."
         rd_cfg = [
-            (s.lang, a) for s in summaries if s.track == "revdict" for a in s.vec_archs 
+            (s.lang, a) for s in summaries if s.track == "revdict" for a in s.vec_archs
         ]
         assert len(set(rd_cfg)) == len(rd_cfg), "Ensure files map to unique setups."
         for summary, submitted_file in zip(summaries, files):
