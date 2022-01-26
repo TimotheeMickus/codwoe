@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
@@ -22,7 +22,6 @@ RUN apt-get update && apt-get install -y \
     python3.8-dev \
     python3-pip \
     python3-software-properties
-
 
 RUN curl https://bootstrap.pypa.io/get-pip.py | python3.8
 
@@ -51,8 +50,8 @@ RUN pip3 install -U --no-cache-dir \
 	Markdown==3.3.4 \
 	matplotlib==3.4.2 \
 	moverscore==1.0.3 \
-	nltk==3.6.2 \
-	numpy==1.20.3 \
+	nltk==3.6.7 \
+	numpy>=1.20.3 \
 	oauthlib==3.1.0 \
 	packaging==21.0 \
 	Pillow==8.3.0 \
@@ -60,11 +59,11 @@ RUN pip3 install -U --no-cache-dir \
 	protobuf==3.17.0 \
 	pyasn1==0.4.8 \
 	pyasn1-modules==0.2.8 \
-	pyemd==0.5.1 \
+  pyemd \
 	pyparsing==2.4.7 \
 	python-dateutil==2.8.1 \
 	PyYAML==5.4.1 \
-	regex==2021.4.4 \
+	regex==2022.1.18 \
 	requests==2.25.1 \
 	requests-oauthlib==1.3.0 \
 	rsa==4.7.2 \
@@ -87,4 +86,5 @@ RUN pip3 install -U --no-cache-dir \
 # comment this line if you have access to a GPU
 RUN find . -type f -name moverscore_v2.py -exec sed -i 's/cuda:0/cpu/g' {} \;
 
-RUN python3 -c "import nltk; nltk.download('punkt')"
+RUN python3 -c "import nltk; nltk.download('punkt');"
+RUN python3 -c "import os; os.environ['MOVERSCORE_MODEL'] = 'distilbert-base-multilingual-cased' ; import moverscore_v2"

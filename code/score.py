@@ -154,8 +154,9 @@ def eval_defmod(args, summary):
 def rank_cosine(preds, targets):
     assocs = F.normalize(preds) @ F.normalize(targets).T
     refs = torch.diagonal(assocs, 0).unsqueeze(1)
-    ranks = (assocs >= refs).sum(1).float().mean().item()
+    ranks = (assocs >= refs).sum(1).float()
     assert ranks.numel() == preds.size(0)
+    ranks = ranks.mean().item()
     return ranks / preds.size(0)
 
 
