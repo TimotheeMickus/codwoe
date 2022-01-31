@@ -73,19 +73,19 @@ Scores were computed using the scoring script provided in this git (`code/score.
 
 |            | Sense-BLEU | Lemma-BLEU | MoverScore
 |------------|-----------:|-----------:|-----------:
-| en SGNS    | 0.03048    | 0.04062    | 0.10339
-| en char    | 0.02630    | 0.03359    | 0.08852
-| en electra | 0.03155    | 0.04155    | 0.08798
-| es SGNS    | 0.03528    | 0.05273    | 0.20130
-| es char    | 0.03291    | 0.04712    | 0.19933
-| fr SGNS    | 0.02983    | 0.04134    | 0.18478
-| fr char    | 0.02913    | 0.03985    | 0.18579
-| fr electra | 0.03061    | 0.03954    | 0.17391
-| it SGNS    | 0.04759    | 0.06910    | 0.20527
-| it char    | 0.02532    | 0.03522    | 0.15902
-| ru SGNS    | 0.03805    | 0.05121    | 0.34716
-| ru char    | 0.02324    | 0.03238    | 0.32306
-| ru electra | 0.02987    | 0.03782    | 0.33577
+| en SGNS    | 0.03048    | 0.04062    | 0.08307
+| en char    | 0.02630    | 0.03359    | 0.04531
+| en electra | 0.03155    | 0.04155    | 0.06732
+| es SGNS    | 0.03528    | 0.05273    | 0.06685
+| es char    | 0.03291    | 0.04712    | 0.06112
+| fr SGNS    | 0.02983    | 0.04134    | 0.04036
+| fr char    | 0.02913    | 0.03985    | 0.01935
+| fr electra | 0.03061    | 0.03954    | 0.03855
+| it SGNS    | 0.04759    | 0.06910    | 0.10154
+| it char    | 0.02532    | 0.03522    | 0.04068
+| ru SGNS    | 0.03805    | 0.05121    | 0.11559
+| ru char    | 0.02324    | 0.03238    | 0.07145
+| ru electra | 0.02987    | 0.03782    | 0.10382
 
 # Using this repository
 To install the exact environment used for our scripts, see the

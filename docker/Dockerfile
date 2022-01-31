@@ -85,6 +85,9 @@ RUN pip3 install -U --no-cache-dir \
 # the next line will patch moverscore so that it runs on cpu, rather than on your cuda:0 device.
 # comment this line if you have access to a GPU
 RUN find . -type f -name moverscore_v2.py -exec sed -i 's/cuda:0/cpu/g' {} \;
+RUN find . -type f -name moverscore_v2.py -exec sed -i '2 i\import os' {} \;
+RUN find . -type f -name moverscore_v2.py -exec sed -i "s/model_name = 'distilbert-base-uncased'/model_name = os.environ.get('MOVERSCORE_MODEL', 'distilbert-base-uncased')/g" {} \;
+
 
 RUN python3 -c "import nltk; nltk.download('punkt');"
 RUN python3 -c "import os; os.environ['MOVERSCORE_MODEL'] = 'distilbert-base-multilingual-cased' ; import moverscore_v2"
