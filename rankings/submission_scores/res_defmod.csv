@@ -1,0 +1,166 @@
+user,EN MvSc.,EN S-BLEU,EN L-BLEU,ES MvSc.,ES S-BLEU,ES L-BLEU,FR MvSc.,FR S-BLEU,FR L-BLEU,IT MvSc.,IT S-BLEU,IT L-BLEU,RU MvSc.,RU S-BLEU,RU L-BLEU,Comments,Date,filename
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:04:09.048119+00:00,fr.test.revdict.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:04:11.803362+00:00,fr.test.revdict.zip
+pzchen,0.10046,0.02909,0.03666,0.08793,0.03467,0.05275,-0.01906,0.02340,0.03377,0.04580,0.04617,0.06966,0.10925,0.04908,0.07136,baseline-sgns-$LANG,2022-02-01 12:04:13.848370+00:00,baseline-out-sgns.zip
+pzchen,0.09765,0.03012,0.03795,0.10061,0.03418,0.05144,-0.06400,0.01590,0.02381,0.10677,0.06010,0.09167,0.09466,0.04589,0.06822,ae-skip-share-sgns-$LANG,2022-02-01 12:04:16.166846+00:00,ae-skip-share-out-sgns.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:04:19.286712+00:00,revdict-baseline-preds.zip
+pzchen,0.07033,0.02526,0.03262,,,,-0.07507,0.01378,0.01930,,,,0.09043,0.03779,0.05450,baseline-electra-$LANG,2022-02-01 12:04:21.767316+00:00,baseline-out-electra.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:04:23.848808+00:00,fr.test.revdict.zip
+pzchen,0.10073,0.02471,0.03017,0.06393,0.02059,0.02875,-0.18641,0.00106,0.00111,0.01908,0.02094,0.02993,0.09174,0.04005,0.05867,baseline-char-$LANG,2022-02-01 12:04:26.228123+00:00,baseline-out-char.zip
+pzchen,0.10368,0.02832,0.03404,0.06525,0.02135,0.02960,0.02630,0.02422,0.03824,0.04389,0.02926,0.04285,0.08480,0.04800,0.07235,ae-skip-share-char-$LANG,2022-02-01 12:04:30.244614+00:00,ae-skip-share-out-char.zip
+pzchen,0.09393,0.02749,0.03434,,,,-0.04478,0.01601,0.02286,,,,0.08843,0.04080,0.05860,ae-skip-share-electra-$LANG,2022-02-01 12:04:33.077318+00:00,ae-skip-share-out-electra.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:04:35.657573+00:00,en.test.revdict.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:04:37.804439+00:00,fr.test.revdict.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:04:40.219400+00:00,en.test.revdict.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:04:44.200059+00:00,es.test.revdict.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:04:46.487460+00:00,ru.test.revdict.zip
+emukans,0.05623,0.02048,0.02594,,,,,,,,,,,,,,2022-02-01 12:04:48.831698+00:00,defmod-lstm_ulbroka_tokenizer_2_layers_1024_hidden-en-electra.json.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:04:50.938249+00:00,en.test.revdict.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:04:52.935214+00:00,ru.test.revdict.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:05:25.788336+00:00,it.test.revdict.zip
+Locchi,,,,,,,,,,,,,,,,test,2022-02-01 12:05:28.772699+00:00,en.test.revdict.predicted.json.zip
+lukechan1231,0.04842,0.02154,0.02658,,,,,,,,,,,,,,2022-02-01 12:05:30.881540+00:00,en.char.test.defmod.json.zip
+emukans,0.05138,0.01996,0.02529,,,,,,,,,,,,,,2022-02-01 12:05:35.184513+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_no_early-en-sgns.json.zip
+pzchen,,,,,,,,,,,,,,,,revdict-ensemble1-$EMBED-$LANG,2022-02-01 12:05:37.277011+00:00,ensemble1.zip
+emukans,0.05623,0.02048,0.02594,,,,,,,,,,,,,,2022-02-01 12:05:39.220654+00:00,defmod-lstm_ulbroka_tokenizer_2_layers_1024_hidden-en-electra.json.zip
+emukans,0.05623,0.02048,0.02594,,,,,,,,,,,,,,2022-02-01 12:05:41.571356+00:00,defmod-lstm_ulbroka_tokenizer_2_layers_1024_hidden-en-electra.json.zip
+emukans,0.06723,0.02284,0.02887,,,,,,,,,,,,,,2022-02-01 12:05:43.780984+00:00,defmod-lstm_ulbroka_tokenizer_2_layers_1024_hidden-en-sgns.json.zip
+emukans,0.04449,0.02185,0.02657,,,,,,,,,,,,,,2022-02-01 12:05:47.188910+00:00,defmod-lstm_ulbroka_tokenizer_2_layers_1024_hidden-en-char.json.zip
+emukans,0.06681,0.01452,0.02078,,,,,,,,,,,,,GRU CSLP 30 length SGNS,2022-02-01 12:05:49.582018+00:00,defmod-gru_ulbroka_tokenizer_2_layers_1024_hidden_30_len-en_cslp-sgns.json.zip
+emukans,0.07579,0.02166,0.02746,,,,,,,,,,,,,GRU CS 30 length SGNS,2022-02-01 12:05:51.393164+00:00,defmod-gru_ulbroka_tokenizer_2_layers_1024_hidden_30_len-en_cs-sgns.json.zip
+emukans,0.06637,0.02232,0.02852,,,,,,,,,,,,,GRU C 30 length SGNS,2022-02-01 12:05:53.548313+00:00,defmod-gru_ulbroka_tokenizer_2_layers_1024_hidden_30_len-en_c-sgns.json.zip
+emukans,0.06862,0.02145,0.02715,,,,,,,,,,,,,GRU 2 layers 3072 50 length SGNS,2022-02-01 12:05:55.512222+00:00,defmod-gru_ulbroka_tokenizer_2_layers_3072_hidden_50_len-en-sgns.json.zip
+emukans,0.06865,0.02139,0.02695,,,,,,,,,,,,,GRU 2 layers 1024 30 length SGNS,2022-02-01 12:05:58.681696+00:00,defmod-gru_ulbroka_tokenizer_2_layers_1024_hidden-en-sgns.json.zip
+emukans,0.07051,0.02418,0.02963,,,,,,,,,,,,,GRU 2 layers 512 30 length SGNS,2022-02-01 12:06:01.098634+00:00,defmod-gru_ulbroka_tokenizer_2_layers_512_hidden-en-sgns.json.zip
+emukans,0.07343,0.02328,0.02883,,,,,,,,,,,,,GRU 2 layers 4096 30 length SGNS,2022-02-01 12:06:03.357951+00:00,defmod-gru_ulbroka_tokenizer_2_layers_4096_hidden-en-sgns.json.zip
+emukans,0.06942,0.01974,0.02547,,,,,,,,,,,,,GRU 4 layers 2048 30 length SGNS,2022-02-01 12:06:05.612675+00:00,defmod-gru_ulbroka_tokenizer_4_layers_2048_hidden-en-sgns.json.zip
+lukechan1231,0.04842,0.02154,0.02658,,,,,,,,,,,,,,2022-02-01 12:06:07.682648+00:00,en.char.test.defmod.json.zip
+lukechan1231,0.04842,0.02154,0.02658,,,,,,,,,,,,,,2022-02-01 12:06:12.716454+00:00,en.char.test.defmod.json.zip
+lukechan1231,0.04842,0.02154,0.02658,,,,,,,,,,,,,,2022-02-01 12:06:15.022199+00:00,en.char.test.defmod.json.zip
+emukans,0.05586,0.02132,0.02699,,,,,,,,,,,,,GRU 4 layers 3072 30 length SGNS,2022-02-01 12:06:16.911037+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden-en-sgns.json.zip
+emukans,0.08473,0.02491,0.03005,,,,,,,,,,,,,GRU 4 layers 3072 50 length SGNS,2022-02-01 12:06:18.542822+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_50_len-en-sgns.json.zip
+pzchen,0.09765,0.03012,0.03795,0.10061,0.03418,0.05144,-0.06400,0.01590,0.02381,0.10677,0.06010,0.09167,0.09466,0.04589,0.06822,,2022-02-01 12:06:21.095892+00:00,ae-skip-share-out-sgns.zip
+pzchen,0.07033,0.02526,0.03262,,,,-0.07507,0.01378,0.01930,,,,0.09043,0.03779,0.05450,,2022-02-01 12:07:33.623337+00:00,baseline-out-electra.zip
+pzchen,0.10073,0.02471,0.03017,0.06393,0.02059,0.02875,-0.18641,0.00106,0.00111,0.01908,0.02094,0.02993,0.09174,0.04005,0.05867,,2022-02-01 12:07:36.254210+00:00,baseline-out-char.zip
+pzchen,0.09393,0.02749,0.03434,,,,-0.04478,0.01601,0.02286,,,,0.08843,0.04080,0.05860,,2022-02-01 12:07:38.601592+00:00,ae-skip-share-out-electra.zip
+pzchen,,,,,,,,,,,,,,,,revdict-ensemble2-$EMBED-$LANG,2022-02-01 12:07:40.475737+00:00,ensemble2.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:07:43.919897+00:00,en_revdict_lstm.json.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:07:46.434273+00:00,en.test.revdict.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:07:49.300441+00:00,it.test.revdict.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:07:51.717222+00:00,ru.test.revdict.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:07:53.984159+00:00,fr.test.revdict.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:07:58.188691+00:00,es.test.revdict.zip
+emukans,0.06712,0.01467,0.01904,,,,,,,,,,,,,Concat,2022-02-01 12:08:00.529661+00:00,defmod-concat.json.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:08:03.084179+00:00,fr.test.revdict.zip
+pzchen,0.10368,0.02832,0.03404,0.06525,0.02135,0.02960,0.02630,0.02422,0.03824,0.04389,0.02926,0.04285,0.08480,0.04800,0.07235,,2022-02-01 12:08:05.796646+00:00,ae-skip-share-out-char.zip
+dkorenci,0.03973,0.02083,0.02728,0.07761,0.03883,0.05496,0.02265,0.02049,0.02431,0.05761,0.00799,0.01230,0.06008,0.02085,0.02965,,2022-02-01 12:08:08.242852+00:00,defmod-submitV1-sgns.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:08:12.003987+00:00,fr.test.revdict.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:08:14.268831+00:00,it.test.revdict.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:08:16.292523+00:00,nouvelles_soumissions.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:08:18.543585+00:00,char_vocab.zip
+dkorenci,0.00698,0.01787,0.02244,0.06249,0.03980,0.05393,-0.00697,0.01780,0.02016,0.03728,0.00771,0.01234,0.04252,0.01792,0.02362,,2022-02-01 12:08:22.584864+00:00,defmod-submitV1-char.zip
+dkorenci,0.03109,0.02036,0.02520,,,,0.00770,0.01876,0.02172,,,,0.05329,0.02023,0.02640,,2022-02-01 12:08:24.686983+00:00,defmod-submitV1-electra.zip
+emukans,0.02265,0.01679,0.02184,,,,,,,,,,,,,GRU 2 layers 1024 30 length SGNS S,2022-02-01 12:08:26.769185+00:00,defmod-gru_ulbroka_tokenizer_2_layers_1024_hidden_30_len-en_s-sgns.json.zip
+emukans,0.06637,0.01472,0.02059,,,,,,,,,,,,,GRU 2 layers 1024 30 length SGNS LP,2022-02-01 12:19:41.107170+00:00,defmod-gru_ulbroka_tokenizer_2_layers_1024_hidden_30_len-en_lp-sgns.json.zip
+emukans,0.08887,0.02285,0.02812,,,,,,,,,,,,,GRU 2 layers 1024 30 length SGNS LPH,2022-02-01 12:19:44.238472+00:00,defmod-gru_ulbroka_tokenizer_2_layers_1024_hidden_30_len-en_lph-sgns.json.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:19:47.815149+00:00,en_revdict_preds.bilstm.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:19:50.341452+00:00,es_revdict_preds.bilstm.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:19:52.441544+00:00,fr_revdict_preds.bilstm.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:19:55.038641+00:00,it_revdict_preds.bilstm.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:19:57.274701+00:00,ru_revdict_preds.bilstm.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:19:59.946250+00:00,Archive.zip
+guntis,0.07984,0.02457,0.03046,,,,,,,,,,,,,ulbroka 4 layers 3072 epoch:005,2022-02-01 12:20:03.739221+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_no_early_epoch_005-en-sgns.zip
+guntis,0.05478,0.01945,0.02491,,,,,,,,,,,,,ulbroka 4 layers 3072 epoch:193,2022-02-01 12:20:06.186445+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_no_early_save04-en-sgns.zip
+guntis,0.04428,0.01857,0.02301,,,,,,,,,,,,,ulbroka 4 3072 electra epoch:55,2022-02-01 12:20:08.343455+00:00,defmod-gru_ulbroka_4_layers_3072_epoch_055-en-electra.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:20:10.800772+00:00,nv_soumissions.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:20:13.580339+00:00,nouv_soumissions.zip
+guntis,0.03408,0.01771,0.02217,,,,,,,,,,,,,ulbroka 4 3072 char epoch:56,2022-02-01 12:20:16.273107+00:00,defmod-gru_ulbroka_4_layers_3072_epoch_056-en-char.zip
+aardoiz,,,,,,,,,,,,,,,,,2022-02-01 12:20:19.295783+00:00,test_preds.zip
+guntis,0.07816,0.02502,0.03081,,,,,,,,,,,,,ulbroka 4 3072 electra epoch:005,2022-02-01 12:20:21.912198+00:00,defmod-gru_ulbroka_4_layers_3072-en-electra-005.zip
+pzchen,,,,,,,,,,,,,,,,,2022-02-01 12:20:24.239699+00:00,ensemble1.zip
+pzchen,0.10046,0.02909,0.03666,0.08793,0.03467,0.05275,-0.01906,0.02340,0.03377,0.04580,0.04617,0.06966,0.10925,0.04908,0.07136,,2022-02-01 12:20:26.428237+00:00,baseline-out-sgns.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:20:30.617090+00:00,soumissions_27-01-2022.zip
+chlrbgus321,,,,,,,,,,,,,,,,,2022-02-01 12:20:33.006741+00:00,revdict.zip
+emukans,0.09280,0.02564,0.03153,,,,,,,,,,,,,GRU 2 layers 500 tokenizer 1024 30 length SGNS LPH,2022-02-01 12:20:36.193554+00:00,defmod-gru_500_tokenizer_2_layers_1024_hidden_30_len-en_lp-sgns.json.zip
+emukans,0.08070,0.02425,0.02947,,,,,,,,,,,,,GRU 4 layers 3072 50 length SGNS LPH 5 ep,2022-02-01 12:20:38.338631+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_50_len-en_lp-sgns.json.zip
+pzchen,-0.00375,0.03055,0.03810,-0.03210,0.02734,0.03669,-0.17636,0.02946,0.03556,-0.16409,0.01889,0.02742,-0.00630,0.02651,0.03312,ngrams,2022-02-01 12:20:40.511309+00:00,ngram.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:49:02.633573+00:00,en_combined.json.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:49:05.449378+00:00,Archive.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:49:07.558292+00:00,soumissions_28-01-2022.zip
+emukans,0.07218,0.02260,0.02794,,,,,,,,,,,,,GRU 4 layers 3072 50 length SGNS LPH 15 ep,2022-02-01 12:49:10.444052+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_50_len-en_lp-sgns.json 2.zip
+emukans,0.05172,0.02229,0.02712,,,,,,,,,,,,,GRU 4 layers 3072 30 length CHAR LPH 15 ep,2022-02-01 12:49:12.536420+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_30_len-en_lp-char.json.zip
+emukans,,,,,,,,,,,,,0.07903,0.01916,0.02498,GRU 4 layers 3072 30 length SGNS LPH 15 ep RU,2022-02-01 12:49:15.463661+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_30_len-ru_lp-sgns.json.zip
+emukans,0.06437,0.02210,0.02692,,,,,,,,,,,,,GRU 4 layers 3072 30 length ELECTRA LPH 15 ep,2022-02-01 12:49:19.448679+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_30_len-en_lp-electra.json.zip
+the0ne,,,,,,,,,,,,,,,,test submission: revdict sgns,2022-02-01 12:49:22.274702+00:00,revdict_sgns_results.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:49:24.564797+00:00,S1_test_revdict.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:49:26.862551+00:00,S2_test_revdict.zip
+Nihed_Bendahman_,,,,,,,,,,,,,,,,,2022-02-01 12:49:29.192438+00:00,S3_test_revdict.zip
+the0ne,,,,,,,,,,,,,,,,test submission: revdict char,2022-02-01 12:49:31.648469+00:00,revdict_char_results.zip
+the0ne,,,,,,,,,,,,,,,,test submission: revdict electra,2022-02-01 12:49:33.989521+00:00,revdict_electra_results.zip
+lukechan1231,0.07126,0.02046,0.02550,,,,,,,,,,,,,,2022-02-01 12:49:40.765121+00:00,en.sgns.test.defmod.json.zip
+lukechan1231,,,,0.06776,0.02502,0.03599,,,,,,,,,,,2022-02-01 12:49:43.015657+00:00,es.char.test.defmod.json.zip
+lukechan1231,,,,,,,0.05351,0.02076,0.02571,,,,,,,,2022-02-01 12:49:45.130238+00:00,fr.sgns.test.defmod.json.zip
+lukechan1231,,,,,,,,,,0.10110,0.03742,0.05353,,,,,2022-02-01 12:49:47.544503+00:00,it.sgns.test.defmod.json.zip
+lukechan1231,,,,,,,,,,,,,0.10900,0.02864,0.03964,,2022-02-01 12:49:49.519259+00:00,ru.sgns.test.defmod.json.zip
+zhwa3087,,,,,,,,,,,,,,,,"2nd
+training: three languages. 
+tricks: (1) workpiece tokenizer trained on these three languages, and (2) added language token when tokenizating the gloss.",2022-02-01 12:49:51.497139+00:00,predict1.json.zip
+aardoiz,,,,,,,,,,,,,,,,,2022-02-01 12:49:54.167640+00:00,test_preds_v2.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:49:56.804493+00:00,Archive_en_cross.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:49:58.780544+00:00,Archive_es_cross.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:50:01.331861+00:00,Archive_fr_cross.zip
+the0ne,,,,,,,,,,,,,,,,multitask finetuning: sgns,2022-02-01 12:50:04.181990+00:00,revdict_sgns_results.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:58:49.927108+00:00,Archive_fr_cross.zip
+the0ne,,,,,,,,,,,,,,,,multitask finetuning: char,2022-02-01 12:58:52.282929+00:00,revdict_char_results.zip
+the0ne,,,,,,,,,,,,,,,,multitask finetuning: electra,2022-02-01 12:58:54.422590+00:00,revdict_electra_results.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:58:56.632536+00:00,Archive_it_cross.zip
+emukans,,,,,,,,,,,,,0.09387,0.03047,0.04120,GRU 4 layers 3072 50 length SGNS LPH 5 ep RU,2022-02-01 12:58:58.792452+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_50_len-ru_lp-sgns.json.zip
+tthhanh,,,,,,,,,,,,,,,,,2022-02-01 12:59:00.750771+00:00,Archive_ru_cross.zip
+emukans,,,,,,,,,,,,,0.09299,0.03127,0.04251,GRU 4 layers 3072 50 length ELECTRA LPH 7 ep RU,2022-02-01 12:59:02.750990+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_50_len-ru_lp-electra.json.zip
+emukans,0.07353,0.02509,0.03074,,,,,,,,,,,,,GRU 4 layers 3072 50 length ELECTRA LPH 7 ep EN,2022-02-01 12:59:04.934403+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_50_len-en_lp-electra.json.zip
+emukans,,,,,,,,,,,,,0.07019,0.02434,0.03249,GRU 4 layers 3072 50 length CHAR LPH 7 ep RU,2022-02-01 12:59:07.087390+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_50_len-ru_lp-char.json.zip
+emukans,,,,,,,0.07468,0.02449,0.02985,,,,,,,GRU 4 layers 3072 50 length ELECTRA LPH 7 ep FR,2022-02-01 12:59:10.298601+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_50_len-fr_lp-electra.json.zip
+emukans,,,,,,,,,,0.09337,0.01220,0.01824,,,,GRU 4 layers 3072 50 length SGNS LPH 6 ep IT,2022-02-01 12:59:12.655912+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_50_len-it_lp-sgns.json.zip
+emukans,0.06296,0.02376,0.02902,,,,,,,,,,,,,GRU 4 layers 3072 50 length CHAR LPH 6 ep EN,2022-02-01 12:59:14.921223+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_50_len-en_lp-char.json.zip
+Locchi,,,,,,,,,,,,,,,,,2022-02-01 12:59:17.545753+00:00,en.test.revdict.predicted.zip
+Locchi,,,,,,,,,,,,,,,,,2022-02-01 12:59:21.423987+00:00,it.test.revdict.predicted.zip
+dkorenci,0.08363,0.03108,0.03933,0.08735,0.04256,0.06080,0.04191,0.02463,0.02906,0.07421,0.01001,0.01511,0.06270,0.02411,0.03085,,2022-02-01 12:59:24.548433+00:00,defmod-submitV2-allvec-8K.zip
+dkorenci,0.07496,0.02808,0.03549,0.07945,0.03869,0.05612,0.04371,0.02419,0.02858,0.06911,0.00905,0.01362,0.07235,0.02290,0.03075,,2022-02-01 12:59:26.793534+00:00,defmod-submitV2-sgns-8K.zip
+dkorenci,0.07627,0.03016,0.03785,0.08489,0.04396,0.06123,0.03814,0.02500,0.02995,0.06207,0.00943,0.01371,0.06188,0.02537,0.03379,,2022-02-01 12:59:29.383576+00:00,defmod-submitV2-allvec-5K.zip
+dkorenci,0.05911,0.02570,0.03279,0.07486,0.03930,0.05746,0.02719,0.02226,0.02604,0.06072,0.00830,0.01218,0.05502,0.02014,0.02690,,2022-02-01 12:59:31.531125+00:00,defmod-submitV2-sgns-5K.zip
+emukans,,,,0.10679,0.03057,0.04450,,,,,,,,,,,2022-02-01 12:59:33.615316+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_50_len-es_lp-sgns.json.zip
+WENGSYX,-0.04507,0.00305,0.00466,-0.06822,0.00292,0.00431,-0.11322,0.00303,0.00453,-0.05864,0.00330,0.00525,-0.01032,0.00364,0.00520,,2022-02-01 12:59:36.019237+00:00,en.test.defmod.zip
+Locchi,0.02706,0.01235,0.01747,,,,,,,,,,,,,,2022-02-01 12:59:40.379830+00:00,en.test.defmod.predicted.zip
+Locchi,0.04898,0.02224,0.02720,,,,,,,,,,,,,,2022-02-01 12:59:43.120882+00:00,en.test.defmod.predicted_v2.zip
+Locchi,,,,,,,,,,0.07124,0.00788,0.01222,,,,,2022-02-01 12:59:45.666414+00:00,it.test.defmod.predicted.zip
+Locchi,,,,0.03776,0.02007,0.02623,,,,,,,,,,,2022-02-01 12:59:48.464254+00:00,es.test.defmod.predicted.zip
+dkorenci,,,,,,,,,,,,,,,,,2022-02-01 13:05:59.964077+00:00,revdict-v8k-b1024-avg.zip
+dkorenci,,,,,,,,,,,,,,,,,2022-02-01 13:06:02.298756+00:00,revdict-v8k-b2048-avg.zip
+dkorenci,,,,,,,,,,,,,,,,,2022-02-01 13:06:04.740677+00:00,revdict-v8k-b4096-avg.zip
+dkorenci,,,,,,,,,,,,,,,,,2022-02-01 13:06:07.035962+00:00,revdict-v8k-b8192-avg.zip
+dkorenci,,,,,,,,,,,,,,,,,2022-02-01 13:06:09.260075+00:00,revdict-v8k-b2048-avg-plat-e150.zip
+guntis,0.04461,0.01876,0.02318,,,,,,,,,,,,,electra 093,2022-02-01 13:06:11.475542+00:00,defmod-gru_ulbroka_4_layers_3072-en-electra-093.zip
+guntis,0.05884,0.02036,0.02626,,,,,,,,,,,,,sgns 315,2022-02-01 13:06:14.002128+00:00,defmod-gru_ulbroka_tokenizer_4_layers_3072_hidden_no_early-en-sgns-315.zip
+dkorenci,,,,,,,,,,,,,,,,,2022-02-01 13:06:16.518200+00:00,revdict-v8k-b2048-mt7-avg-plat.zip
+guntis,0.04731,0.01917,0.02379,,,,,,,,,,,,,electra 085,2022-02-01 13:06:20.442528+00:00,defmod-gru_ulbroka_4_layers_3072-en-electra-085.zip
+WENGSYX,-0.04507,0.00305,0.00466,-0.06822,0.00292,0.00431,-0.11322,0.00303,0.00453,-0.05864,0.00330,0.00525,-0.01032,0.00364,0.00520,,2022-02-01 13:06:23.136127+00:00,results.zip
+the0ne,,,,,,,,,,,,,,,,revdict contrastive,2022-02-01 13:06:25.470976+00:00,revdict_contrastive.zip
+dkorenci,0.09057,0.03200,0.04045,0.09252,0.04303,0.06153,0.05205,0.02505,0.02946,0.07611,0.00974,0.01469,0.07526,0.02517,0.03252,,2022-02-01 13:06:27.560421+00:00,defmod-submitV2-CF-allvec-sgns-8K.zip
+dkorenci,0.08054,0.03056,0.03831,0.09319,0.04459,0.06207,0.04432,0.02489,0.02982,0.06892,0.00937,0.01359,0.07140,0.02586,0.03439,,2022-02-01 13:06:29.686010+00:00,defmod-submitV2-CF-allvec-sgns-5K.zip
+talent404,0.12847,0.03278,0.04250,,,,,,,,,,,,,english defmod,2022-02-01 13:06:34.144091+00:00,test.json.zip
+zhwa3087,,,,,,,,,,,,,,,,"3rd
+training: five languages
+tricks: (1) Unigram tokenizer trained on these five languages, (2) language tokens, and (3) dynamic weights averaging losses for sgns and char.",2022-02-01 13:06:36.534003+00:00,3rd.zip
+zhwa3087,,,,,,,,,,,,,,,,"final
+training: five languages
+tricks: (1) Unigram tokenizer trained on these five languages, (2) language tokens, and (3) dynamic weights averaging losses for sgns and char.",2022-02-01 13:06:38.780846+00:00,final.zip
+guntis,0.04283,0.01889,0.02338,,,,,,,,,,,,,,2022-02-01 13:06:43.743485+00:00,defmod-gru_ulbroka_4_layers_3072-en-electra-101.zip
+dkorenci,0.08511,0.03137,0.03976,0.09162,0.04457,0.06428,0.04778,0.02623,0.03150,0.07247,0.00935,0.01423,0.07740,0.02687,0.03527,electra 101,2022-02-01 13:06:46.158191+00:00,defmod-submit-V3-allvec.zip
+dkorenci,0.06953,0.02716,0.03419,0.08347,0.03857,0.05800,0.03916,0.02387,0.02813,0.07268,0.00915,0.01370,0.07342,0.02252,0.03077,,2022-02-01 13:06:48.604489+00:00,defmod-submit-V3-sgns.zip
+dkorenci,0.09251,0.03263,0.04170,0.08867,0.04357,0.06160,0.04917,0.02787,0.03319,0.07578,0.01045,0.01547,0.07522,0.02721,0.03612,,2022-02-01 13:06:50.621731+00:00,defmod-submit-V4-allvec-gru.zip
+dkorenci,0.09075,0.03302,0.04114,0.09188,0.04367,0.06086,0.05089,0.02707,0.03205,0.07574,0.01027,0.01520,0.07604,0.02584,0.03331,,2022-02-01 13:06:56.750144+00:00,defmod-submit-V4-allvec-lstm.zip
+WENGSYX,-0.09175,0.00365,0.00505,0.02284,0.01258,0.01956,-0.17094,0.00244,0.00344,-0.01241,0.01790,0.02915,-0.01567,0.01090,0.01426,,2022-02-01 21:42:34.383443+00:00,results.zip
+dkorenci,0.08930,0.03177,0.04023,0.09323,0.04467,0.06443,0.05493,0.02581,0.03100,0.07375,0.00913,0.01357,0.07996,0.02697,0.03536,,2022-02-01 10:31:20.217420+00:00,defmod-submitV3-CF-allvec-sgns.zip
+dkorenci,0.09419,0.03334,0.04151,0.09218,0.04369,0.06090,0.05621,0.02696,0.03193,0.07698,0.01018,0.01491,0.07795,0.02594,0.03345,,2022-02-01 11:40:22.727710+00:00,defmod-submitV4-CF-allvec-lstm-gru.zip
+cunliang.kong,0.13475,0.03127,0.03957,0.12778,0.03914,0.05606,0.04193,0.02679,0.03691,0.11717,0.06646,0.09926,0.14820,0.04843,0.06548,,2022-02-01 11:55:05.593202+00:00,results.zip
+cunliang.kong,0.13475,0.03127,0.03957,0.12778,0.03914,0.05606,0.04193,0.02679,0.03691,0.11717,0.06646,0.09926,0.14820,0.04843,0.06548,,2022-02-01 11:55:05.602946+00:00,results.zip

@@ -43,6 +43,75 @@ sure to mention SemEval in your email object.
 
 # How hard is it?
 
+## Official rankings
+
+Below are the official rankings for the SemEval 2022 CODWOE Shared task.
+More information about the submissions we received is available in this git (see the `rankings/` sub-directory).
+
+### Definition Modeling track
+
+Below are the results for the Definition Modeling track.
+
+| username      | Rank EN | Rank ES | Rank FR | Rank IT | Rank RU
+|---------------|--------:|--------:|--------:|--------:|--------:
+| Locchi        | 8       | 6       |         | 7       |
+| WENGSYX       | 9       | 7       | 6       | 6       | 6
+| cunliang.kong | 3       | 2       | 3       | **1**   | 2
+| dkorenci      | 2       | **1**   | **1**   | 5       | 5
+| emukans       | 5       | 4       | 4       | 4       | 3
+| guntis        | 6       |         |         |         |
+| lukechan1231  | 7       | 5       | 5       | 3       | 4
+| pzchen        | 4       | 3       | 2       | 2       | **1**   
+| talent404     | **1**   |         |         |         |
+
+### Reverse Dictionary track
+
+Below are the results for the Reverse dictionary tracks.
+There are separate rankings, based on which targets participants have submitted.
+
+
+#### A. SGNS targets
+
+| user             | Rank EN | Rank ES | Rank FR | Rank IT | Rank RU
+|------------------|--------:|--------:|--------:|--------:|--------:
+| Locchi           | 5       |         |         | 4       |
+| Nihed_Bendahman_ | 6       | 5       | 4       | 6       | 4
+| WENGSYX          | 2       | 2       | 2       | 3       | **1**
+| aardoiz          |         | 3       |         |         |
+| chlrbgus321      | **1**   |         |         |         |
+| dkorenci         | 4       | **1**   | **1**   | **1**   | 2
+| pzchen           | 3       | 4       | 3       | 2       | 3
+| the0ne           | 8       |         |         |         |
+| tthhanh          | 9       | 7       | 6       | 7       | 6
+| zhwa3087         | 7       | 6       | 5       | 5       | 5
+
+#### B. ELECTRA targets
+
+| user             | Rank EN | Rank FR | Rank RU
+|------------------|--------:|--------:|--------:
+| Locchi           | 3       |         |
+| Nihed_Bendahman_ | 2       | 2       | 4
+| WENGSYX          | 4       | 4       | 2
+| dkorenci         | 5       | 3       | 3
+| pzchen           | **1**   | **1**   | **1**
+| the0ne           | 6       |         |
+
+
+#### C. Char-based targets
+
+| user             | Rank EN | Rank ES | Rank FR | Rank IT | Rank RU
+|------------------|--------:|--------:|--------:|--------:|--------:
+| Locchi           | **1**   |         |         | 4       |
+| Nihed_Bendahman_ | 2       | 2       | 2       | 3       | 4
+| WENGSYX          | 7       | 5       | 5       | 6       | 5
+| dkorenci         | 4       | 3       | 4       | 2       | 2
+| pzchen           | 3       | **1**   | **1**   | **1**   | **1**
+| the0ne           | 5       |         |         |         |
+| zhwa3087         | 6       | 4       | 3       | 5       | 3
+
+
+
+## Baseline results
 Here are baseline results on the development set for the two tracks.
 We used the code described in `code/baseline_archs` to generate these scores.
 
