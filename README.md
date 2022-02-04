@@ -74,16 +74,16 @@ There are separate rankings, based on which targets participants have submitted.
 
 | user             | Rank EN | Rank ES | Rank FR | Rank IT | Rank RU
 |------------------|--------:|--------:|--------:|--------:|--------:
-| Locchi           | 5       |         |         | 4       |
-| Nihed_Bendahman_ | 6       | 5       | 4       | 6       | 4
-| WENGSYX          | 2       | 2       | 2       | 3       | **1**
+| Locchi           | 4       |         |         | 4       |
+| Nihed_Bendahman_ | 5       | 5       | 4       | 6       | 4
+| WENGSYX          | **1**   | 2       | 2       | 3       | **1**
 | aardoiz          |         | 3       |         |         |
-| chlrbgus321      | **1**   |         |         |         |
-| dkorenci         | 4       | **1**   | **1**   | **1**   | 2
-| pzchen           | 3       | 4       | 3       | 2       | 3
-| the0ne           | 8       |         |         |         |
-| tthhanh          | 9       | 7       | 6       | 7       | 6
-| zhwa3087         | 7       | 6       | 5       | 5       | 5
+| chlrbgus321      | N/A     |         |         |         |
+| dkorenci         | 3       | **1**   | **1**   | **1**   | 2
+| pzchen           | 2       | 4       | 3       | 2       | 3
+| the0ne           | 7       |         |         |         |
+| tthhanh          | 8       | 7       | 6       | 7       | 6
+| zhwa3087         | 6       | 6       | 5       | 5       | 5
 
 #### B. ELECTRA targets
 
