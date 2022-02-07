@@ -77,7 +77,7 @@ There are separate rankings, based on which targets participants have submitted.
 | Locchi           | 4       |         |         | 4       |
 | Nihed_Bendahman_ | 5       | 5       | 4       | 6       | 4
 | WENGSYX          | **1**   | 2       | 2       | 3       | **1**
-| aardoiz          |         | 3       |         |         |
+| MMG              |         | 3       |         |         |
 | chlrbgus321      | N/A     |         |         |         |
 | IRB-NLP          | 3       | **1**   | **1**   | **1**   | 2
 | pzchen           | 2       | 4       | 3       | 2       | 3
