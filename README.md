@@ -55,8 +55,8 @@ Below are the results for the Definition Modeling track.
 |  user / team  | Rank EN | Rank ES | Rank FR | Rank IT | Rank RU
 |---------------|--------:|--------:|--------:|--------:|--------:
 | Locchi        | 8       | 6       |         | 7       |
-| WENGSYX       | 9       | 7       | 6       | 6       | 6
-| cunliang.kong | 3       | 2       | 3       | **1**   | 2
+| LingJin       | 9       | 7       | 6       | 6       | 6
+| BLCU-ICALL    | 3       | 2       | 3       | **1**   | 2
 | IRB-NLP       | 2       | **1**   | **1**   | 5       | 5
 | emukans       | 5       | 4       | 4       | 4       | 3
 | guntis        | 6       |         |         |         |
@@ -75,14 +75,14 @@ There are separate rankings, based on which targets participants have submitted.
 | user / team      | Rank EN | Rank ES | Rank FR | Rank IT | Rank RU
 |------------------|--------:|--------:|--------:|--------:|--------:
 | Locchi           | 4       |         |         | 4       |
-| Nihed_Bendahman_ | 5       | 5       | 4       | 6       | 4
-| WENGSYX          | **1**   | 2       | 2       | 3       | **1**
+| BL.Research      | 5       | 5       | 4       | 6       | 4
+| LingJing         | **1**   | 2       | 2       | 3       | **1**
 | MMG              |         | 3       |         |         |
 | chlrbgus321      | N/A     |         |         |         |
 | IRB-NLP          | 3       | **1**   | **1**   | **1**   | 2
 | pzchen           | 2       | 4       | 3       | 2       | 3
 | the0ne           | 7       |         |         |         |
-| tthhanh          | 8       | 7       | 6       | 7       | 6
+| JSI              | 8       | 7       | 6       | 7       | 6
 | zhwa3087         | 6       | 6       | 5       | 5       | 5
 
 #### B. ELECTRA targets
@@ -90,8 +90,8 @@ There are separate rankings, based on which targets participants have submitted.
 | user / team      | Rank EN | Rank FR | Rank RU
 |------------------|--------:|--------:|--------:
 | Locchi           | 3       |         |
-| Nihed_Bendahman_ | 2       | 2       | 4
-| WENGSYX          | 4       | 4       | 2
+| BL.Research      | 2       | 2       | 4
+| LingJing         | 4       | 4       | 2
 | IRB-NLP          | 5       | 3       | 3
 | pzchen           | **1**   | **1**   | **1**
 | the0ne           | 6       |         |
@@ -102,8 +102,8 @@ There are separate rankings, based on which targets participants have submitted.
 | user / team      | Rank EN | Rank ES | Rank FR | Rank IT | Rank RU
 |------------------|--------:|--------:|--------:|--------:|--------:
 | Locchi           | **1**   |         |         | 4       |
-| Nihed_Bendahman_ | 2       | 2       | 2       | 3       | 4
-| WENGSYX          | 7       | 5       | 5       | 6       | 5
+| BL.Research      | 2       | 2       | 2       | 3       | 4
+| LingJing         | 7       | 5       | 5       | 6       | 5
 | IRB-NLP          | 4       | 3       | 4       | 2       | 2
 | pzchen           | 3       | **1**   | **1**   | **1**   | **1**
 | the0ne           | 5       |         |         |         |
