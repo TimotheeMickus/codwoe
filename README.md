@@ -55,7 +55,7 @@ Below are the results for the Definition Modeling track.
 |  user / team  | Rank EN | Rank ES | Rank FR | Rank IT | Rank RU
 |---------------|--------:|--------:|--------:|--------:|--------:
 | Locchi        | 8       | 6       |         | 7       |
-| LingJin       | 9       | 7       | 6       | 6       | 6
+| LingJing      | 9       | 7       | 6       | 6       | 6
 | BLCU-ICALL    | 3       | 2       | 3       | **1**   | 2
 | IRB-NLP       | 2       | **1**   | **1**   | 5       | 5
 | emukans       | 5       | 4       | 4       | 4       | 3
