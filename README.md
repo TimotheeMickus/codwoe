@@ -12,6 +12,20 @@ a number of useful features, such as scoring submissions, a format checker and a
 few simple baseline architectures. It is also the exact copy of what is used on
 the codalab.
 
+# Use this repository
+
+The code and data of this shared task are provided CC-BY-SA.
+Also consider citing the task paper (to appear):
+```
+@inproceedings{mickus-etal-2022-semeval,
+    title={{SemEval-2022 Task 1}: CODWOE -- COmparing Dictionaries and WOrd Embeddings},
+    author={Mickus, Timothee and Paperno, Denis and Constant, Mathieu and van Deemter, Kees},
+    booktitle={Proceedings of the 16th International Workshop on Semantic Evaluation (SemEval-2022)}
+    year={2022},
+    publisher={Association for Computational Linguistics},
+}
+```
+
 <!-- We provide data using git LFS. Make sure to install the relevant software if you
 wish to clone this repository: see the documentation
 [here](https://git-lfs.github.com/). -->
