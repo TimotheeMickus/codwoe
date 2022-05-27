@@ -12,24 +12,6 @@ a number of useful features, such as scoring submissions, a format checker and a
 few simple baseline architectures. It is also the exact copy of what is used on
 the codalab.
 
-# Use this repository
-
-The code and data of this shared task are provided CC-BY-SA.
-Also consider citing the task paper (to appear):
-```
-@inproceedings{mickus-etal-2022-semeval,
-    title={{SemEval-2022 Task 1}: CODWOE -- COmparing Dictionaries and WOrd Embeddings},
-    author={Mickus, Timothee and Paperno, Denis and Constant, Mathieu and van Deemter, Kees},
-    booktitle={Proceedings of the 16th International Workshop on Semantic Evaluation (SemEval-2022)}
-    year={2022},
-    publisher={Association for Computational Linguistics},
-}
-```
-
-<!-- We provide data using git LFS. Make sure to install the relevant software if you
-wish to clone this repository: see the documentation
-[here](https://git-lfs.github.com/). -->
-
 **Datasets are no longer provided directly on this repository. The competition datasets are now available on this page: [https://codwoe.atilf.fr/](https://codwoe.atilf.fr/).**
 
 # What is this task?
@@ -290,3 +272,26 @@ In the reverse dictionary, participants should construct JSON files that contain
  + any of the valid embeddings ("char", "sgns", or "electra" key in EN/FR/RU)
 
 Other keys can be added. More details concerning the evaluation procedure are available here: [link](https://competitions.codalab.org/competitions/34022#learn_the_details-evaluation).
+
+
+# Using this repository
+
+The code and data of this shared task are provided under a CC-BY-SA license.
+If you use thhis repository in your researcj, please cite the task paper (to appear):
+```
+@inproceedings{mickus-etal-2022-semeval,
+    title={{SemEval-2022 Task 1}: CODWOE -- COmparing Dictionaries and WOrd Embeddings},
+    author={Mickus, Timothee and Paperno, Denis and Constant, Mathieu and van Deemter, Kees},
+    booktitle={Proceedings of the 16th International Workshop on Semantic Evaluation (SemEval-2022)}
+    year={2022},
+    publisher={Association for Computational Linguistics},
+}
+```
+
+<!-- We provide data using git LFS. Make sure to install the relevant software if you
+wish to clone this repository: see the documentation
+[here](https://git-lfs.github.com/). -->
+
+Also consider looking at participants' submissions (preprints, to be updated upon publication):
+- [IRB-NLP at SemEval-2022 Task 1: Exploring the Relationship Between Words and Their Semantic Representations](https://arxiv.org/abs/2205.06840)
+
