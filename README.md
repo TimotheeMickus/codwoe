@@ -280,18 +280,31 @@ The code and data of this shared task are provided under a CC-BY-SA license.
 If you use thhis repository in your researcj, please cite the task paper (to appear):
 ```
 @inproceedings{mickus-etal-2022-semeval,
-    title={{SemEval-2022 Task 1}: CODWOE -- COmparing Dictionaries and WOrd Embeddings},
-    author={Mickus, Timothee and Paperno, Denis and Constant, Mathieu and van Deemter, Kees},
-    booktitle={Proceedings of the 16th International Workshop on Semantic Evaluation (SemEval-2022)}
-    year={2022},
-    publisher={Association for Computational Linguistics},
+    title = "{S}emeval-2022 Task 1: {CODWOE} {--} Comparing Dictionaries and Word Embeddings",
+    author = "Mickus, Timothee  and
+      Van Deemter, Kees  and
+      Constant, Mathieu  and
+      Paperno, Denis",
+    booktitle = "Proceedings of the 16th International Workshop on Semantic Evaluation (SemEval-2022)",
+    month = jul,
+    year = "2022",
+    address = "Seattle, United States",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2022.semeval-1.1",
+    pages = "1--14",
+    abstract = "Word embeddings have advanced the state of the art in NLP across numerous tasks. Understanding the contents of dense neural representations is of utmost interest to the computational semantics community. We propose to focus on relating these opaque word vectors with human-readable definitions, as found in dictionaries This problem naturally divides into two subtasks: converting definitions into embeddings, and converting embeddings into definitions. This task was conducted in a multilingual setting, using comparable sets of embeddings trained homogeneously.",
 }
 ```
 
-<!-- We provide data using git LFS. Make sure to install the relevant software if you
-wish to clone this repository: see the documentation
-[here](https://git-lfs.github.com/). -->
-
-Also consider looking at participants' submissions (preprints, to be updated upon publication):
-- [IRB-NLP at SemEval-2022 Task 1: Exploring the Relationship Between Words and Their Semantic Representations](https://arxiv.org/abs/2205.06840)
-
+Also consider looking at participants' submissions:
+- [1Cademy at Semeval-2022 Task 1: Investigating the Effectiveness of Multilingual, Multitask, and Language-Agnostic Tricks for the Reverse Dictionary Task](https://aclanthology.org/2022.semeval-1.2/)
+- [BLCU-ICALL at SemEval-2022 Task 1: Cross-Attention Multitasking Framework for Definition Modeling](https://aclanthology.org/2022.semeval-1.3/)
+- [LingJing at SemEval-2022 Task 1: Multi-task Self-supervised Pre-training for Multilingual Reverse Dictionary](https://aclanthology.org/2022.semeval-1.4/)
+- [IRB-NLP at SemEval-2022 Task 1: Exploring the Relationship Between Words and Their Semantic Representations](https://aclanthology.org/2022.semeval-1.5/)
+- [TLDR at SemEval-2022 Task 1: Using Transformers to Learn Dictionaries and Representations](https://aclanthology.org/2022.semeval-1.6/)
+- [MMG at SemEval-2022 Task 1: A Reverse Dictionary approach based on a review of the dataset from a lexicographic perspective](https://aclanthology.org/2022.semeval-1.7/)
+- [Edinburgh at SemEval-2022 Task 1: Jointly Fishing for Word Embeddings and Definitions](https://aclanthology.org/2022.semeval-1.8/)
+- [RIGA at SemEval-2022 Task 1: Scaling Recurrent Neural Networks for CODWOE Dictionary Modeling](https://aclanthology.org/2022.semeval-1.9/)
+- [Uppsala University at SemEval-2022 Task 1: Can Foreign Entries Enhance an English Reverse Dictionary?](https://aclanthology.org/2022.semeval-1.10/)
+- [BL.Research at SemEval-2022 Task 1: Deep networks for Reverse Dictionary using embeddings and LSTM autoencoders](https://aclanthology.org/2022.semeval-1.11/)
+- [JSI at SemEval-2022 Task 1: CODWOE - Reverse Dictionary: Monolingual and cross-lingual approaches](https://aclanthology.org/2022.semeval-1.12/)
